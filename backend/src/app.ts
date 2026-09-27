@@ -25,15 +25,22 @@ const app = express();
 
 // Middleware
 app.use(helmet());
-const allowedOrigins = (process.env.CORS_ORIGIN || process.env.FRONTEND_URL || 'http://localhost:5173')
+const allowedOrigins = (process.env.CORS_ORIGIN || process.env.FRONTEND_URL || 'http://localhost:5173,http://localhost:3000,http://localhost:5000')
   .split(',')
   .map(o => o.trim().replace(/\/+$/, ''))
   .filter(Boolean);
+
 app.use(cors({
   origin: (origin, cb) => {
     // Allow same-origin / non-browser clients (no Origin header)
     if (!origin) return cb(null, true);
-    if (allowedOrigins.includes(origin.replace(/\/+$/, ''))) return cb(null, true);
+    if (allowedOrigins.includes('*')) return cb(null, true);
+    const cleanOrigin = origin.replace(/\/+$/, '');
+    if (allowedOrigins.includes(cleanOrigin)) return cb(null, true);
+    // Automatically allow Vercel previews & Render deployments
+    if (cleanOrigin.endsWith('.vercel.app') || cleanOrigin.endsWith('.onrender.com') || cleanOrigin.includes('localhost')) {
+      return cb(null, true);
+    }
     return cb(new Error(`CORS blocked for origin ${origin}`));
   },
   credentials: true,

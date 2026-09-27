@@ -17,6 +17,7 @@ import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import BookingWizard from './components/BookingWizard'
+import FloatingActions from './components/FloatingActions'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import CustomerDashboard from './pages/CustomerDashboard'
@@ -81,16 +82,14 @@ export default function App() {
             </Routes>
           </main>
           <Footer />
-          <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-2">
-            <a href="https://wa.me/919635006403" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full bg-emerald-500 text-white grid place-items-center shadow-xl hover:scale-110 transition text-xl" aria-label="WhatsApp">✆</a>
-            <a href="tel:9635006403" className="hidden md:grid w-12 h-12 rounded-full bg-[#0a1e40] text-white place-items-center shadow-xl hover:scale-110 transition" aria-label="Call">☎</a>
-          </div>
+          <FloatingActions />
           <div className="fixed bottom-0 inset-x-0 z-30 md:hidden bg-white border-t border-slate-200 px-3 py-2 flex gap-2">
-            <a href="tel:9635006403" className="flex-1 py-3 rounded-xl border border-slate-200 font-bold text-center">Call: 9635006403</a>
-            <a href="/booking" className="flex-1 py-3 rounded-xl bg-[#0a1e40] text-white font-black text-center">Book Now</a>
+            <a href="tel:9635006403" className="flex-1 py-3 rounded-xl border border-slate-200 font-bold text-center text-sm text-[#0a1e40]">📞 Call: 9635006403</a>
+            <a href="/booking" className="flex-1 py-3 rounded-xl bg-[#0a1e40] text-yellow-400 font-black text-center text-sm shadow-md">Book Service</a>
           </div>
         </div>
       </BrowserRouter>
     </AuthProvider>
   )
 }
+

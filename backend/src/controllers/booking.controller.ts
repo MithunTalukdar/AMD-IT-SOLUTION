@@ -188,42 +188,33 @@ export const updateBookingStatus = asyncHandler(async (req: Request, res: Respon
   if (!booking) return res.status(404).json({ success: false, message: 'Booking not found' });
 
   // RBAC: who can trigger which transition?
-  // pending->confirmed: admin only
-  // confirmed->technician_assigned: admin only (requires technician)
-  // technician_assigned->on_the_way, on_the_way->in_progress, in_progress->completed: technician (assigned) or admin
-  // cancelled: customer (own pending/confirmed) or admin/technician (any before completed)
   const current = booking.status as BookingStatus;
   const next = status as BookingStatus;
 
-  if (!STATUS_TRANSITIONS[current]?.includes(next)) {
-    return res.status(400).json({ success: false, message: `Invalid transition from ${current} to ${next}. Allowed: ${STATUS_TRANSITIONS[current].join(', ') || 'none'}` });
-  }
+  // Admin has master permission to set any valid status
+  if (user.role !== 'admin') {
+    if (!STATUS_TRANSITIONS[current]?.includes(next)) {
+      return res.status(400).json({ success: false, message: `Invalid transition from ${current} to ${next}. Allowed: ${STATUS_TRANSITIONS[current].join(', ') || 'none'}` });
+    }
 
-  // Role checks per transition
-  if (next === 'confirmed' && user.role !== 'admin') {
-    return res.status(403).json({ success: false, message: 'Only admin can confirm bookings' });
-  }
-  if (next === 'technician_assigned' && user.role !== 'admin') {
-    return res.status(403).json({ success: false, message: 'Only admin can assign technician' });
-  }
-  if (['on_the_way', 'in_progress', 'completed'].includes(next) && !['technician', 'admin'].includes(user.role)) {
-    return res.status(403).json({ success: false, message: 'Only technician or admin can update this status' });
-  }
-  if (next === 'cancelled') {
-    // customer can cancel only own pending/confirmed/technician_assigned before on_the_way
-    if (user.role === 'customer') {
-      if (booking.user.toString() !== user.id) return res.status(403).json({ success: false, message: 'Forbidden' });
-      if (!['pending', 'confirmed', 'technician_assigned'].includes(current)) {
-        return res.status(400).json({ success: false, message: `Cannot cancel from status ${current}` });
+    if (['on_the_way', 'in_progress', 'completed'].includes(next) && !['technician', 'admin'].includes(user.role)) {
+      return res.status(403).json({ success: false, message: 'Only technician or admin can update this status' });
+    }
+    if (next === 'cancelled') {
+      if (user.role === 'customer') {
+        if (booking.user.toString() !== user.id) return res.status(403).json({ success: false, message: 'Forbidden' });
+        if (!['pending', 'confirmed', 'technician_assigned'].includes(current)) {
+          return res.status(400).json({ success: false, message: `Cannot cancel from status ${current}` });
+        }
       }
     }
-  }
 
-  // Technician ownership check for technician transitions
-  if (['on_the_way', 'in_progress', 'completed'].includes(next) && user.role === 'technician') {
-    const tech = await Technician.findOne({ user: user.id });
-    if (!tech || booking.technician?.toString() !== tech._id.toString()) {
-      return res.status(403).json({ success: false, message: 'You are not assigned to this booking' });
+    // Technician ownership check for technician transitions
+    if (['on_the_way', 'in_progress', 'completed'].includes(next) && user.role === 'technician') {
+      const tech = await Technician.findOne({ user: user.id });
+      if (!tech || booking.technician?.toString() !== tech._id.toString()) {
+        return res.status(403).json({ success: false, message: 'You are not assigned to this booking' });
+      }
     }
   }
 
@@ -233,6 +224,13 @@ export const updateBookingStatus = asyncHandler(async (req: Request, res: Respon
   await booking.populate('service', 'title price');
   await booking.populate({ path: 'technician', populate: { path: 'user', select: 'fullname' } } as any);
   return res.json({ success: true, message: `Booking status updated to ${next}`, data: booking });
+});
+
+export const deleteBooking = asyncHandler(async (req: Request, res: Response) => {
+  if (!requireDB(res)) return;
+  const booking = await Booking.findByIdAndDelete(req.params.id);
+  if (!booking) return res.status(404).json({ success: false, message: 'Booking not found' });
+  return res.json({ success: true, message: 'Booking deleted successfully' });
 });
 
 export const assignTechnician = asyncHandler(async (req: Request, res: Response) => {

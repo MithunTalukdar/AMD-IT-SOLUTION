@@ -4,15 +4,15 @@
   "version": "1.0.0",
   "description": "AMD IT SOLUTION - Premium IT Services Platform",
   "scripts": {
-    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && npm run dev",
+    "install:all": "npm install && npm --prefix frontend install && npm --prefix backend install",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "build:frontend": "cd frontend && npm run build",
-    "build:backend": "cd backend && npm run build",
-    "build": "npm run build:frontend && npm run build:backend",
-    "start:backend": "cd backend && npm start",
-    "lint:frontend": "cd frontend && npm run lint"
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build",
+    "build": "npm run build:frontend; npm run build:backend",
+    "start:backend": "npm --prefix backend start",
+    "lint:frontend": "npm --prefix frontend run lint"
   },
   "devDependencies": {
     "concurrently": "^9.0.1"

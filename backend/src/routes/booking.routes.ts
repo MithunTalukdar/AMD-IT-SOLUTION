@@ -8,6 +8,7 @@ import {
   assignTechnician,
   cancelBooking,
   getAvailableSlots,
+  deleteBooking,
 } from '../controllers/booking.controller.js';
 import { protect } from '../middleware/auth.js';
 import { authorize } from '../middleware/authorize.js';
@@ -29,5 +30,6 @@ router.get('/:id', getBookingById);
 router.patch('/:id/status', authorize('admin', 'technician'), validate(bookingStatusSchema), updateBookingStatus);
 router.post('/:id/assign', authorize('admin'), validate(assignTechnicianSchema), assignTechnician);
 router.patch('/:id/cancel', cancelBooking);
+router.delete('/:id', authorize('admin'), deleteBooking);
 
 export default router;
