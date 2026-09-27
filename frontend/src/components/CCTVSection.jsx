@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function CCTVSection() {
   return (
     <section id="cctv" className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
@@ -27,13 +29,15 @@ export default function CCTVSection() {
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#quick-book" className="px-6 py-3 bg-[#0a1e40] text-white font-black rounded-full hover:bg-[#1e4a9a] transition">Get Free Quote →</a>
-            <a href="tel:+919999999999" className="px-6 py-3 border border-slate-200 font-bold rounded-full hover:bg-slate-50">Talk to CCTV Expert</a>
+            <Link to="/booking?service=cctv-home-kit" className="px-6 py-3 bg-[#0a1e40] text-white font-black rounded-full hover:bg-[#1e4a9a] transition shadow-md hover:scale-105">
+              Book CCTV Service →
+            </Link>
+            <a href="tel:9635006403" className="px-6 py-3 border border-slate-200 font-bold rounded-full hover:bg-slate-50">Talk to CCTV Expert: 9635006403</a>
           </div>
 
           <div className="mt-6 flex gap-4 text-center">
-            <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex-1"><div className="font-black text-[#0a1e40]">₹6,499</div><div className="text-xs">2-Cam Kit</div></div>
-            <div className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex-1"><div className="font-black text-[#0a1e40]">₹12,999</div><div className="text-xs">4-Cam Kit</div></div>
+            <Link to="/booking?service=cctv-home-kit" className="bg-slate-50 border border-slate-200 hover:border-[#1e4a9a] rounded-xl px-4 py-3 flex-1 transition block"><div className="font-black text-[#0a1e40]">₹6,499</div><div className="text-xs">2-Cam Kit</div></Link>
+            <Link to="/booking?service=cctv-shop-combo" className="bg-slate-50 border border-slate-200 hover:border-[#1e4a9a] rounded-xl px-4 py-3 flex-1 transition block"><div className="font-black text-[#0a1e40]">₹12,999</div><div className="text-xs">4-Cam Kit</div></Link>
             <div className="bg-yellow-400 border border-amber-300 rounded-xl px-4 py-3 flex-1"><div className="font-black text-[#0a1e40]">2 Yrs</div><div className="text-xs font-bold">Warranty</div></div>
           </div>
         </div>

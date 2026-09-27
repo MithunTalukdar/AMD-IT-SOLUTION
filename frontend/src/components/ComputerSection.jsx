@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function ComputerSection() {
   return (
     <section id="computer" className="bg-slate-50 border-y border-slate-200">
@@ -19,21 +21,23 @@ export default function ComputerSection() {
 
           <div className="mt-5 grid grid-cols-2 gap-3">
             {[
-              { t: "Laptop Service", p: "From ₹599", d: "Full check + cleaning" },
-              { t: "Desktop Assemble", p: "From ₹18,999", d: "Office & gaming builds" },
-              { t: "SSD Upgrade", p: "From ₹2,199", d: "10x faster booting" },
-              { t: "Printer & Accessories", p: "Best Price", d: "Ink, toner, peripherals" },
+              { t: "Laptop Service", p: "From ₹599", d: "Full check + cleaning", s: "computer-repair-service" },
+              { t: "Desktop Assemble", p: "From ₹18,999", d: "Office & gaming builds", s: "custom-pc-assembly" },
+              { t: "SSD Upgrade", p: "From ₹2,199", d: "10x faster booting", s: "ssd-speed-upgrade" },
+              { t: "Printer & Accessories", p: "Best Price", d: "Ink, toner, peripherals", s: "printer-repair-service" },
             ].map(c => (
-              <div key={c.t} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
-                <div className="font-black text-sm text-[#0a1e40]">{c.t}</div>
+              <Link key={c.t} to={`/booking?service=${c.s}`} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-[#1e4a9a] transition block group">
+                <div className="font-black text-sm text-[#0a1e40] group-hover:text-[#1e4a9a]">{c.t}</div>
                 <div className="text-xs text-slate-500">{c.d}</div>
                 <div className="mt-2 font-black text-amber-600">{c.p}</div>
-              </div>
+              </Link>
             ))}
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#quick-book" className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-[#0a1e40] font-black rounded-full shadow">Book Repair Visit →</a>
+            <Link to="/booking?service=computer" className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-[#0a1e40] font-black rounded-full shadow hover:scale-105 transition">
+              Book Repair Visit →
+            </Link>
             <span className="px-4 py-3 bg-white border border-slate-200 rounded-full text-xs font-bold">✓ Genuine Parts • 3 Month Service Warranty</span>
           </div>
         </div>

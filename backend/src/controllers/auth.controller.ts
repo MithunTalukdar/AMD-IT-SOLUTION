@@ -33,12 +33,46 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const login = asyncHandler(async (req: Request, res: Response) => {
-  if (!requireDB(res)) return;
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ success: false, message: 'Email and password are required' });
   }
-  const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
+
+  const normEmail = email.toLowerCase().trim();
+
+  // Built-in Admin Master Credentials
+  if (normEmail === 'admin@amditsolution.in' && (password === 'Admin@123456' || password === 'admin123')) {
+    const adminId = '000000000000000000000002';
+    const token = signToken({ id: adminId, role: 'admin', email: normEmail });
+    return res.json({
+      success: true,
+      message: 'Admin Login successful',
+      data: {
+        user: { id: adminId, fullname: 'AMD Admin', email: normEmail, role: 'admin', phone: '9635006403' },
+        token,
+      },
+    });
+  }
+
+  // Built-in Technician Master Credentials
+  if (normEmail === 'technician@amditsolution.in' && (password === 'Tech@123456' || password === 'tech123')) {
+    const techId = '000000000000000000000003';
+    const token = signToken({ id: techId, role: 'technician', email: normEmail });
+    return res.json({
+      success: true,
+      message: 'Technician Login successful',
+      data: {
+        user: { id: techId, fullname: 'Senior Technician', email: normEmail, role: 'technician', phone: '9635006403' },
+        token,
+      },
+    });
+  }
+
+  if (!isDBConnected()) {
+    return res.status(503).json({ success: false, message: 'Database connecting, please try again or use demo accounts.' });
+  }
+
+  const user = await User.findOne({ email: normEmail }).select('+password');
   if (!user) {
     return res.status(401).json({ success: false, message: 'Invalid credentials' });
   }
@@ -61,8 +95,23 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const me = asyncHandler(async (req: Request, res: Response) => {
-  if (!requireDB(res)) return;
   const userId = (req as any).user.id;
+  const userEmail = (req as any).user.email;
+
+  if (userId === '000000000000000000000002' || userEmail === 'admin@amditsolution.in') {
+    return res.json({
+      success: true,
+      data: { _id: userId, fullname: 'AMD Admin', email: 'admin@amditsolution.in', role: 'admin', phone: '9635006403', isActive: true },
+    });
+  }
+  if (userId === '000000000000000000000003' || userEmail === 'technician@amditsolution.in') {
+    return res.json({
+      success: true,
+      data: { _id: userId, fullname: 'Senior Technician', email: 'technician@amditsolution.in', role: 'technician', phone: '9635006403', isActive: true },
+    });
+  }
+
+  if (!isDBConnected()) return res.status(503).json({ success: false, message: 'DB not connected' });
   const user = await User.findById(userId).select('-password');
   if (!user) return res.status(404).json({ success: false, message: 'User not found' });
   return res.json({ success: true, data: user });

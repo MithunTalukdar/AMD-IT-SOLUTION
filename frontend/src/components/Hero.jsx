@@ -33,7 +33,7 @@ export default function Hero() {
             <a href="#quick-book" className="px-6 md:px-7 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-[#0a1e40] font-black rounded-full shadow-[0_12px_30px_rgba(250,204,21,0.4)] hover:scale-[1.02] transition flex items-center gap-2">
               Book a Service <span>→</span>
             </a>
-            <a href="tel:+919999999999" className="px-6 md:px-7 py-3 bg-white/10 backdrop-blur border border-white/20 font-bold rounded-full hover:bg-white hover:text-[#0a1e40] transition flex items-center gap-2">
+            <a href="tel:9635006403" className="px-6 md:px-7 py-3 bg-white/10 backdrop-blur border border-white/20 font-bold rounded-full hover:bg-white hover:text-[#0a1e40] transition flex items-center gap-2">
               <span className="w-8 h-8 bg-white text-[#0a1e40] rounded-full grid place-items-center text-sm">☎</span>
               Call Now
             </a>

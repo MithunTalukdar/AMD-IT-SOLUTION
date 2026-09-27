@@ -25,8 +25,17 @@ const app = express();
 
 // Middleware
 app.use(helmet());
+const allowedOrigins = (process.env.CORS_ORIGIN || process.env.FRONTEND_URL || 'http://localhost:5173')
+  .split(',')
+  .map(o => o.trim().replace(/\/+$/, ''))
+  .filter(Boolean);
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  origin: (origin, cb) => {
+    // Allow same-origin / non-browser clients (no Origin header)
+    if (!origin) return cb(null, true);
+    if (allowedOrigins.includes(origin.replace(/\/+$/, ''))) return cb(null, true);
+    return cb(new Error(`CORS blocked for origin ${origin}`));
+  },
   credentials: true,
 }));
 app.use(morgan('dev'));

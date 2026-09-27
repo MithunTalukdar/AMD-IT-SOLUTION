@@ -1,9 +1,13 @@
+import { Link } from 'react-router-dom';
+
 const services = [
   {
     title: "CCTV Surveillance",
     desc: "HD cameras, DVR/NVR, remote viewing",
     price: "From ₹1,999",
     icon: "📹",
+    serviceKey: "cctv",
+    anchor: "#cctv",
     img: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&q=80",
     tag: "Most Popular",
     color: "from-blue-600 to-indigo-600",
@@ -13,6 +17,8 @@ const services = [
     desc: "Repair, formatting, upgrades, accessories",
     price: "From ₹299",
     icon: "💻",
+    serviceKey: "computer",
+    anchor: "#computer",
     img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&q=80",
     tag: "Same Day",
     color: "from-slate-700 to-slate-900",
@@ -22,6 +28,8 @@ const services = [
     desc: "Router, LAN, office networking setup",
     price: "From ₹499",
     icon: "🌐",
+    serviceKey: "networking",
+    anchor: "#networking",
     img: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80",
     tag: "Business",
     color: "from-cyan-600 to-blue-600",
@@ -31,12 +39,13 @@ const services = [
     desc: "Annual maintenance for offices & shops",
     price: "From ₹2,999/yr",
     icon: "🛡️",
+    serviceKey: "amc",
+    anchor: "#amc",
     img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80",
     tag: "Save 30%",
     color: "from-amber-500 to-orange-600",
   },
 ];
-
 
 export default function ServiceCards() {
   return (
@@ -49,24 +58,34 @@ export default function ServiceCards() {
           </h2>
           <p className="text-sm text-slate-600 mt-2 max-w-xl">Premium hardware, certified engineers, transparent billing — residential to enterprise.</p>
         </div>
-        <a href="#contact" className="hidden md:inline-flex px-5 py-2.5 rounded-full border border-slate-200 font-bold text-sm hover:bg-slate-50">View All Services →</a>
+        <Link to="/services" className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-slate-300 font-bold text-sm text-[#0a1e40] bg-white hover:bg-slate-100 hover:border-[#1e4a9a] transition shadow-sm">
+          View All Services →
+        </Link>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {services.map(s => (
-          <div key={s.title} className="group bg-white rounded-[20px] border border-slate-200 overflow-hidden shadow-card hover:shadow-xl hover:-translate-y-1 transition-all">
-            <div className={`h-1 bg-gradient-to-r ${s.color}`} />
-            <div className="relative h-36 overflow-hidden">
-              <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
-              <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-full text-xs font-black shadow">{s.icon} {s.tag}</div>
-              <div className="absolute bottom-3 left-3 bg-[#0a1e40] text-white text-xs font-bold px-3 py-1 rounded-full">{s.price}</div>
+          <div key={s.title} className="group bg-white rounded-[20px] border border-slate-200 overflow-hidden shadow-card hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between">
+            <div>
+              <div className={`h-1 bg-gradient-to-r ${s.color}`} />
+              <div className="relative h-36 overflow-hidden">
+                <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                <div className="absolute top-3 left-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-full text-xs font-black shadow">{s.icon} {s.tag}</div>
+                <div className="absolute bottom-3 left-3 bg-[#0a1e40] text-white text-xs font-bold px-3 py-1 rounded-full">{s.price}</div>
+              </div>
+              <div className="p-4">
+                <h3 className="font-black text-[#0a1e40]">{s.title}</h3>
+                <p className="text-xs text-slate-500 mt-1 leading-relaxed">{s.desc}</p>
+              </div>
             </div>
-            <div className="p-4">
-              <h3 className="font-black text-[#0a1e40]">{s.title}</h3>
-              <p className="text-xs text-slate-500 mt-1 leading-relaxed">{s.desc}</p>
-              <div className="mt-3 flex gap-2">
-                <a href="#quick-book" className="flex-1 text-center py-2 rounded-full bg-[#0a1e40] text-white text-xs font-black hover:bg-[#1e4a9a] transition">Book Now</a>
-                <a href="#cctv" className="px-3 py-2 rounded-full border border-slate-200 text-xs font-bold hover:bg-slate-50">Details</a>
+            <div className="p-4 pt-0">
+              <div className="mt-1 flex gap-2">
+                <Link to={`/booking?service=${s.serviceKey}`} className="flex-1 text-center py-2 rounded-full bg-[#0a1e40] text-white text-xs font-black hover:bg-[#1e4a9a] transition shadow">
+                  Book Now
+                </Link>
+                <a href={s.anchor} className="px-3 py-2 rounded-full border border-slate-200 text-xs font-bold hover:bg-slate-50">
+                  Details
+                </a>
               </div>
             </div>
           </div>

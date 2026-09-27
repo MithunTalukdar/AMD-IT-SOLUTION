@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Register() {
   const { register } = useAuth();
   const nav = useNavigate();
+  const loc = useLocation();
   const [form, setForm] = useState({ fullname: '', email: '', password: '', phone: '', role: 'customer' });
   const [err, setErr] = useState('');
   const [loading, setLoading] = useState(false);
@@ -13,8 +14,16 @@ export default function Register() {
     e.preventDefault(); setErr(''); setLoading(true);
     try {
       await register(form);
-      nav('/customer/bookings');
-    } catch (e) { setErr(e.response?.data?.message || e.response?.data?.errors?.[0]?.message || e.message); } finally { setLoading(false); }
+      // Return to the pending booking flow if there is one, else default dashboard
+      const stateFrom = loc.state?.from;
+      const redirectParam = new URLSearchParams(loc.search).get('redirect');
+      const dest =
+        (typeof stateFrom === 'string' && stateFrom.startsWith('/') && stateFrom) ||
+        (stateFrom?.pathname ? stateFrom.pathname + (stateFrom.search || '') : '') ||
+        (redirectParam && redirectParam.startsWith('/') ? redirectParam : '') ||
+        '/customer/bookings';
+      nav(dest, { replace: true });
+    } catch (e) { setErr(e.response?.data?.message || e.response?.data?.errors?.[0]?.message || 'Booking failed. Please try again.'); } finally { setLoading(false); }
   };
 
   return (

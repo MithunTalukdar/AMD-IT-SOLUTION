@@ -2,6 +2,19 @@ import { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+function resolveDestination(loc, user) {
+  // 1. Explicit redirect passed via navigation state (string or location object)
+  const stateFrom = loc.state?.from;
+  if (typeof stateFrom === 'string' && stateFrom.startsWith('/')) return stateFrom;
+  if (stateFrom?.pathname) return stateFrom.pathname + (stateFrom.search || '');
+  // 2. ?redirect=/booking?service=... query param (e.g. deep links)
+  const params = new URLSearchParams(loc.search);
+  const redirect = params.get('redirect');
+  if (redirect && redirect.startsWith('/')) return redirect;
+  // 3. Role-based default (existing behaviour preserved)
+  return user.role === 'admin' ? '/admin/bookings' : user.role === 'technician' ? '/technician/bookings' : '/customer/bookings';
+}
+
 export default function Login() {
   const { login } = useAuth();
   const nav = useNavigate();
@@ -10,13 +23,21 @@ export default function Login() {
   const [err, setErr] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Preserve booking redirect on the Register link
+  const pendingRedirect = (() => {
+    const s = loc.state?.from;
+    if (typeof s === 'string' && s.startsWith('/')) return s;
+    if (s?.pathname) return s.pathname + (s.search || '');
+    const q = new URLSearchParams(loc.search).get('redirect');
+    return q && q.startsWith('/') ? q : '';
+  })();
+
   const submit = async (e) => {
     e.preventDefault(); setErr(''); setLoading(true);
     try {
       const u = await login(form.email, form.password);
-      const dest = loc.state?.from || (u.role === 'admin' ? '/admin/bookings' : u.role === 'technician' ? '/technician/bookings' : '/customer/bookings');
-      nav(dest);
-    } catch (e) { setErr(e.response?.data?.message || e.message); } finally { setLoading(false); }
+      nav(resolveDestination(loc, u), { replace: true });
+    } catch (e) { setErr(e.response?.data?.message || 'Unable to connect to server. Please try again.'); } finally { setLoading(false); }
   };
 
   return (
@@ -26,6 +47,9 @@ export default function Login() {
           <div className="w-12 h-12 rounded-xl bg-[#0a1e40] text-white grid place-items-center font-black mx-auto">A</div>
           <h1 className="mt-3 text-2xl font-black text-[#0a1e40]">Welcome Back</h1>
           <p className="text-sm text-slate-500">Login to manage your bookings</p>
+          {pendingRedirect.startsWith('/booking') && (
+            <p className="mt-2 text-xs bg-blue-50 border border-blue-200 text-blue-800 rounded-xl px-3 py-2">Please login to continue your booking — you&apos;ll return to it automatically.</p>
+          )}
         </div>
         {err && <div className="mt-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-2">{err}</div>}
         <div className="mt-5 space-y-3">
@@ -34,10 +58,30 @@ export default function Login() {
           <button disabled={loading} className="w-full py-3 rounded-xl bg-[#0a1e40] text-white font-black disabled:opacity-60">{loading ? 'Signing in…' : 'Login →'}</button>
         </div>
         <div className="mt-4 text-center text-sm">
-          No account? <Link to="/register" className="text-[#1e4a9a] font-bold">Register</Link>
+          No account? <Link to={pendingRedirect ? `/register?redirect=${encodeURIComponent(pendingRedirect)}` : '/register'} state={pendingRedirect ? { from: pendingRedirect } : undefined} className="text-[#1e4a9a] font-bold">Register</Link>
         </div>
-        <div className="mt-3 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-xs text-center">
-          Demo: use any registered role. Admin/Technician must be seeded via backend.
+
+        {/* Quick 1-click credentials */}
+        <div className="mt-5 pt-4 border-t border-slate-100">
+          <div className="text-xs font-bold text-slate-500 uppercase tracking-wider text-center mb-2.5">
+            Quick Fill Demo Accounts:
+          </div>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <button
+              type="button"
+              onClick={() => setForm({ email: 'admin@amditsolution.in', password: 'Admin@123456' })}
+              className="p-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-800 font-bold border border-red-200 transition text-center"
+            >
+              👑 Fill Admin
+            </button>
+            <button
+              type="button"
+              onClick={() => setForm({ email: 'technician@amditsolution.in', password: 'Tech@123456' })}
+              className="p-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 font-bold border border-blue-200 transition text-center"
+            >
+              🔧 Fill Technician
+            </button>
+          </div>
         </div>
       </form>
     </div>

@@ -8,12 +8,12 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const links = [
-    { label: 'Services', href: '/#services' },
-    { label: 'CCTV', href: '/#cctv' },
-    { label: 'Networking', href: '/#networking' },
-    { label: 'AMC', href: '/#amc' },
-    { label: 'Gallery', href: '/#gallery' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'All Services', href: '/services', isRoute: true },
+    { label: 'CCTV', href: '/#cctv', isRoute: false },
+    { label: 'Networking', href: '/#networking', isRoute: false },
+    { label: 'AMC', href: '/#amc', isRoute: false },
+    { label: 'Gallery', href: '/#gallery', isRoute: false },
+    { label: 'Contact', href: '/#contact', isRoute: false },
   ];
 
   const handleLogout = () => { logout(); navigate('/'); };
@@ -27,13 +27,13 @@ export default function Navbar() {
               <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
               24/7 Support Available
             </span>
-            <a href="tel:+919999999999" className="hidden sm:flex items-center gap-1.5 hover:text-yellow-300 transition">
+            <a href="tel:9635006403" className="hidden sm:flex items-center gap-1.5 hover:text-yellow-300 transition">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              +91 99999 99999
+              9635006403
             </a>
           </div>
           <div className="hidden md:flex items-center gap-4">
-            <span>📍 Kolkata | Pan-West Bengal</span>
+            <span>📍 24 T C Road, Kolkata - 700053</span>
             <span className="bg-yellow-400 text-[#0a1e40] px-2 py-0.5 rounded-full font-bold text-xs">Verified Technicians</span>
             {user && <span className="bg-white/15 rounded-full px-2 py-0.5">Hi, {user.fullname?.split(' ')[0]} ({user.role})</span>}
           </div>
@@ -51,10 +51,17 @@ export default function Navbar() {
 
         <div className="hidden lg:flex items-center gap-7">
           {links.map(l => (
-            <a key={l.label} href={l.href} className="text-sm font-semibold text-slate-700 hover:text-[#1e4a9a] transition relative group">
-              {l.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400 group-hover:w-full transition-all" />
-            </a>
+            l.isRoute ? (
+              <Link key={l.label} to={l.href} className="text-sm font-semibold text-slate-700 hover:text-[#1e4a9a] transition relative group">
+                {l.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400 group-hover:w-full transition-all" />
+              </Link>
+            ) : (
+              <a key={l.label} href={l.href} className="text-sm font-semibold text-slate-700 hover:text-[#1e4a9a] transition relative group">
+                {l.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400 group-hover:w-full transition-all" />
+              </a>
+            )
           ))}
           {user?.role === 'customer' && <Link to="/customer/bookings" className="text-sm font-bold text-[#1e4a9a]">My Bookings</Link>}
           {user?.role === 'admin' && <Link to="/admin/bookings" className="text-sm font-bold text-red-600">Admin</Link>}
@@ -85,7 +92,11 @@ export default function Navbar() {
       {open && (
         <div className="lg:hidden border-t bg-white px-4 py-4 space-y-3 shadow-2xl">
           {links.map(l => (
-            <a key={l.label} href={l.href} onClick={() => setOpen(false)} className="block py-2 font-semibold text-slate-800 border-b border-slate-100 last:border-0">{l.label}</a>
+            l.isRoute ? (
+              <Link key={l.label} to={l.href} onClick={() => setOpen(false)} className="block py-2 font-semibold text-slate-800 border-b border-slate-100 last:border-0">{l.label}</Link>
+            ) : (
+              <a key={l.label} href={l.href} onClick={() => setOpen(false)} className="block py-2 font-semibold text-slate-800 border-b border-slate-100 last:border-0">{l.label}</a>
+            )
           ))}
           {user?.role === 'customer' && <Link to="/customer/bookings" onClick={() => setOpen(false)} className="block py-2 font-bold text-[#1e4a9a]">My Bookings</Link>}
           {user?.role === 'admin' && <Link to="/admin/bookings" onClick={() => setOpen(false)} className="block py-2 font-bold text-red-600">Admin Dashboard</Link>}

@@ -22,7 +22,7 @@ export default function FAQ() {
           <div className="mt-6 bg-gradient-to-br from-[#0a1e40] to-[#1e4a9a] text-white rounded-[20px] p-6">
             <div className="font-black">Need Instant Help?</div>
             <p className="text-sm text-slate-200 mt-1">Our technician will call you back in 5 minutes.</p>
-            <a href="tel:+919999999999" className="mt-4 inline-flex px-5 py-2.5 bg-yellow-400 text-[#0a1e40] font-black rounded-full">Call +91 99999 99999 →</a>
+            <a href="tel:9635006403" className="mt-4 inline-flex px-5 py-2.5 bg-yellow-400 text-[#0a1e40] font-black rounded-full">Call 9635006403 →</a>
             <div className="mt-3 flex items-center gap-2 text-xs text-slate-300">
               <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" /> 12 experts online now
             </div>

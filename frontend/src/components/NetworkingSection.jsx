@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function NetworkingSection() {
   return (
     <section id="networking" className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
@@ -23,12 +25,14 @@ export default function NetworkingSection() {
             ))}
           </div>
 
-          <div className="mt-6 bg-gradient-to-r from-[#0a1e40] to-[#1e4a9a] text-white rounded-2xl px-5 py-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-6 bg-gradient-to-r from-[#0a1e40] to-[#1e4a9a] text-white rounded-2xl px-5 py-4 flex flex-wrap items-center justify-between gap-3 shadow-lg">
             <div>
-              <div className="font-black">Free Network Audit</div>
+              <div className="font-black">Free Network Audit & Setup</div>
               <div className="text-xs text-slate-200">We check your current speed & security loopholes</div>
             </div>
-            <a href="#quick-book" className="px-5 py-2 bg-yellow-400 text-[#0a1e40] font-black rounded-full">Book Audit</a>
+            <Link to="/booking?service=networking" className="px-5 py-2.5 bg-yellow-400 text-[#0a1e40] font-black rounded-full shadow hover:bg-yellow-300 transition">
+              Book Audit & Setup →
+            </Link>
           </div>
         </div>
 

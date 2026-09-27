@@ -1,6 +1,18 @@
 import axios from 'axios';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// Accept both `http://host:5000` and `http://host:5000/api` env formats.
+// All call sites use the `/api/...` prefix, so normalize the base to the origin.
+function normalizeBase(raw) {
+  const fallback = 'http://localhost:5000';
+  let base = (raw || fallback).trim().replace(/\/+$/, '');
+  if (!base) return fallback;
+  if (!/^https?:\/\//i.test(base)) base = `https://${base}`;
+  // Strip a trailing `/api` (and any `/api/...` suffix) to avoid `/api/api/...`
+  base = base.replace(/\/api(\/.*)?$/i, '');
+  return base.replace(/\/+$/, '') || fallback;
+}
+
+const API = normalizeBase(import.meta.env.VITE_API_URL);
 
 const client = axios.create({
   baseURL: API,
