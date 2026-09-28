@@ -34,7 +34,6 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.15.0",
-    "@vercel/node": "^3.2.32",
     "concurrently": "^9.0.1",
     "typescript": "^5.8.3"
   },
