@@ -41,21 +41,21 @@ export const serviceUpdateSchema = Joi.object({
 
 // Booking — customer flow: service → date → timeSlot → details → address → summary
 export const bookingCreateSchema = Joi.object({
-  service: Joi.string().hex().length(24).required(),
-  serviceType: Joi.string().valid('cctv', 'computer', 'networking', 'amc', 'biometric', 'other').optional(),
-  date: Joi.date().iso().required(),
+  service: Joi.string().required(),
+  serviceType: Joi.string().optional().allow('', null),
+  date: Joi.alternatives().try(Joi.date().iso(), Joi.string()).required(),
   timeSlot: Joi.string().required(), // must be from available slots
   customerName: Joi.string().min(2).max(100).required(),
   customerEmail: Joi.string().email().required(),
-  customerPhone: Joi.string().pattern(/^[0-9+\-\s]{7,15}$/).required(),
-  address: Joi.string().min(5).max(300).required(),
+  customerPhone: Joi.string().min(6).max(20).required(),
+  address: Joi.string().min(2).max(500).required(),
   city: Joi.string().min(2).max(100).required(),
-  pincode: Joi.string().pattern(/^[0-9]{4,10}$/).optional().allow('', null),
+  pincode: Joi.string().optional().allow('', null),
   // legacy phone kept for backward compat
-  phone: Joi.string().optional(),
+  phone: Joi.string().optional().allow('', null),
   notes: Joi.string().optional().allow('', null),
   totalAmount: Joi.number().min(0).optional(),
-  coupon: Joi.string().hex().length(24).optional().allow(null, ''),
+  coupon: Joi.string().optional().allow(null, ''),
 });
 
 export const bookingStatusSchema = Joi.object({
