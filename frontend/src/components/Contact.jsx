@@ -101,7 +101,6 @@ export default function Contact() {
               <div>
                 <div className="font-black">Visit Us</div>
                 <div className="text-sm text-slate-200 font-semibold">24 T C Road, Kolkata - 700053</div>
-                <div className="text-xs text-slate-400">GSTIN: 19BAAPK5344N1ZD</div>
               </div>
             </div>
             <div className="bg-white/10 border border-white/10 rounded-2xl p-4 flex gap-3">

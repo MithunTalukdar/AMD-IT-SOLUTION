@@ -9,7 +9,6 @@
 * **Primary Phone / Hotline:** [9635006403](tel:9635006403)
 * **Direct WhatsApp:** [Chat on WhatsApp (+91 9635006403)](https://wa.me/919635006403?text=Hello%20AMD%20IT%20SOLUTION,%20I%20would%20like%20to%20inquire%20about%20your%20services.)
 * **Official Email:** [itsolutions.amd@gmail.com](mailto:itsolutions.amd@gmail.com)
-* **GSTIN:** `19BAAPK5344N1ZD`
 
 ---
 
@@ -172,4 +171,4 @@ cd ../backend && npm run build
 ---
 
 ## 📜 License
-© AMD IT SOLUTION — All Rights Reserved. (GSTIN: 19BAAPK5344N1ZD)
+© AMD IT SOLUTION — All Rights Reserved.

@@ -1640,7 +1640,7 @@ function SettingsTab() {
         </div>
         <div>
           <label className="text-xs font-bold text-slate-600">GSTIN Number</label>
-          <input value={form.gstin || '19BAAPK5344N1ZD'} onChange={e => setForm({ ...form, gstin: e.target.value })} className="mt-1 w-full rounded-xl border p-2.5 text-sm bg-slate-50 font-mono" />
+          <input value={form.gstin || ''} onChange={e => setForm({ ...form, gstin: e.target.value })} placeholder="Optional GSTIN" className="mt-1 w-full rounded-xl border p-2.5 text-sm bg-slate-50 font-mono" />
         </div>
         <div>
           <label className="text-xs font-bold text-slate-600">Emergency 24/7 Support</label>

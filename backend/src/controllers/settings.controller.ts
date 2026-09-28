@@ -15,7 +15,7 @@ export const getSettings = asyncHandler(async (req: Request, res: Response) => {
         address: '24 T C Road, Kolkata - 700053',
         city: 'Kolkata',
         whatsapp: '+919635006403',
-        gstin: '19BAAPK5344N1ZD',
+        gstin: '',
         social: { facebook: '', instagram: '', youtube: '', linkedin: '' },
         heroTitle: 'PREMIUM IT SOLUTIONS',
         heroSubtitle: 'CCTV • Computer • Networking • AMC',

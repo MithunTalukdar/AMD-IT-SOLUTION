@@ -67,7 +67,6 @@ export default function Footer() {
             <div>📞 9635006403</div>
             <div>✉ itsolutions.amd@gmail.com</div>
             <div>📍 24 T C Road, Kolkata - 700053</div>
-            <div>🏛️ GSTIN: 19BAAPK5344N1ZD</div>
             <div className="mt-3 bg-yellow-400 text-[#0a1e40] rounded-full px-4 py-2 font-black inline-flex">Mon - Sun: 10 AM - 9 PM</div>
           </div>
         </div>
@@ -75,7 +74,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex flex-wrap justify-between gap-3 text-xs">
-          <div>© {new Date().getFullYear()} ADM TECHNO SOLUTION. All rights reserved. • GSTIN: 19BAAPK5344N1ZD • Certified Partner</div>
+          <div>© {new Date().getFullYear()} ADM TECHNO SOLUTION. All rights reserved. • Certified Partner</div>
           <div className="flex gap-3">
             <span>🔒 Secure</span>
             <span>✓ Verified</span>
