@@ -55,15 +55,24 @@ export default function Register() {
         role: 'customer',
       });
 
-      // Return to the pending booking flow if there is one, else default dashboard
+      // Redirect to login page so user logs in explicitly with their email & password
       const stateFrom = loc.state?.from;
       const redirectParam = new URLSearchParams(loc.search).get('redirect');
-      const dest =
+      const destRedirect =
         (typeof stateFrom === 'string' && stateFrom.startsWith('/') && stateFrom) ||
         (stateFrom?.pathname ? stateFrom.pathname + (stateFrom.search || '') : '') ||
         (redirectParam && redirectParam.startsWith('/') ? redirectParam : '') ||
-        '/customer/bookings';
-      nav(dest, { replace: true });
+        '';
+
+      const loginTarget = destRedirect ? `/login?redirect=${encodeURIComponent(destRedirect)}` : '/login';
+      nav(loginTarget, {
+        replace: true,
+        state: {
+          successMsg: 'Account created successfully! Please enter your password to sign in.',
+          email: form.email.trim().toLowerCase(),
+          from: destRedirect || undefined,
+        },
+      });
     } catch (e) {
       setErr(cleanErrorMessage(e));
     } finally {

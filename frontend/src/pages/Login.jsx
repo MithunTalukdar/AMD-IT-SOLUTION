@@ -19,8 +19,9 @@ export default function Login() {
   const { login } = useAuth();
   const nav = useNavigate();
   const loc = useLocation();
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ email: loc.state?.email || '', password: '' });
   const [err, setErr] = useState('');
+  const [successMsg, setSuccessMsg] = useState(loc.state?.successMsg || '');
   const [loading, setLoading] = useState(false);
 
   // Preserve booking redirect on the Register link
@@ -49,6 +50,7 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     setErr('');
+    setSuccessMsg('');
 
     if (!form.email.trim()) {
       setErr('Please enter your email address.');
@@ -91,6 +93,24 @@ export default function Login() {
             </p>
           )}
         </div>
+
+        {/* Success Alert Banner (e.g. from registration) */}
+        {successMsg && (
+          <div className="mt-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm rounded-xl px-4 py-3 flex items-start justify-between gap-2 shadow-sm animate-in fade-in duration-200">
+            <div className="flex items-start gap-2">
+              <span className="text-emerald-600 font-bold mt-0.5">✓</span>
+              <span className="leading-snug">{successMsg}</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setSuccessMsg('')}
+              className="text-emerald-500 hover:text-emerald-800 font-bold text-base leading-none p-1 transition"
+              aria-label="Dismiss message"
+            >
+              ×
+            </button>
+          </div>
+        )}
 
         {err && (
           <div className="mt-4 bg-red-50 border border-red-200 text-red-800 text-sm rounded-xl px-4 py-3 flex items-start justify-between gap-2 shadow-sm animate-in fade-in duration-200">

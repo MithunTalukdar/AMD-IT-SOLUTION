@@ -24,13 +24,7 @@ export function AuthProvider({ children }) {
 
   const register = async (payload) => {
     const { data } = await client.post('/api/auth/register', payload);
-    const t = data.data.token;
-    const u = data.data.user;
-    localStorage.setItem('amd_token', t);
-    localStorage.setItem('amd_user', JSON.stringify(u));
-    setToken(t);
-    setUser(u);
-    return u;
+    return data;
   };
 
   const logout = () => {
