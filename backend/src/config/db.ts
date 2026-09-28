@@ -1,13 +1,32 @@
 import mongoose from 'mongoose';
 
+let cachedPromise: Promise<typeof mongoose> | null = null;
+
 const connectDB = async (): Promise<void> => {
-  const uri = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/amd_it_solution';
-  // Do not throw if DB unavailable — keep health checks working
+  if (mongoose.connection.readyState === 1) {
+    return;
+  }
+
+  const uri = (process.env.MONGODB_URI || process.env.MONGO_URI || '').trim() || 'mongodb://127.0.0.1:27017/amd_it_solution';
+
+  if (!cachedPromise || mongoose.connection.readyState === 0) {
+    cachedPromise = mongoose.connect(uri, {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    }).then((m) => {
+      console.log(`MongoDB connected: ${m.connection.host}`);
+      return m;
+    }).catch((err) => {
+      cachedPromise = null;
+      console.warn('MongoDB connection failed:', (err as Error).message);
+      throw err;
+    });
+  }
+
   try {
-    await mongoose.connect(uri);
-    console.log(`MongoDB connected: ${mongoose.connection.host}`);
+    await cachedPromise;
   } catch (err) {
-    console.warn('MongoDB connection failed — running in fallback mode:', (err as Error).message);
+    // allow server to continue running in fallback mode
   }
 };
 
