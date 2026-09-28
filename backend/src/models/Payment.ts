@@ -46,6 +46,5 @@ const paymentSchema = new mongoose.Schema<IPayment>(
 
 // One pending/paid payment per booking (allow retries for failed)
 paymentSchema.index({ booking: 1, status: 1 });
-paymentSchema.index({ razorpayOrderId: 1 }, { sparse: true });
 
 export default mongoose.model<IPayment>('Payment', paymentSchema);
