@@ -2,6 +2,7 @@
   "name": "amd-it-solution",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "description": "AMD IT SOLUTION - Premium IT Services Platform",
   "scripts": {
     "install:all": "npm install && npm --prefix frontend install && npm --prefix backend install",
@@ -13,7 +14,7 @@
     "build": "npm run build:frontend; npm run build:backend",
     "start:backend": "npm --prefix backend start",
     "lint:frontend": "npm --prefix frontend run lint",
-    "vercel-build": "npm --prefix frontend run build"
+    "vercel-build": "npm --prefix backend run build && npm --prefix frontend run build"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
