@@ -10,6 +10,10 @@ export default function Contact() {
     message: '',
   });
 
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+
   const SERVICE_NAMES = {
     cctv: 'CCTV Installation & Surveillance',
     computer: 'Computer & Laptop Repair',
