@@ -49,7 +49,7 @@ export default function CustomerDashboard() {
         key: keyId,
         amount: Math.round(amount * 100),
         currency,
-        name: 'AMD IT SOLUTION',
+        name: 'ADM TECHNO SOLUTION',
         description: booking.service?.title || 'Service Booking',
         order_id: orderId,
         prefill: { name: booking.customerName, email: booking.customerEmail, contact: booking.customerPhone },

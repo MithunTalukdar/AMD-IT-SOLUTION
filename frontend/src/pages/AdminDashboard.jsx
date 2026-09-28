@@ -51,7 +51,7 @@ export default function AdminDashboard() {
               A
             </div>
             <div>
-              <div className="font-black text-base tracking-tight leading-tight">AMD IT SOLUTION</div>
+              <div className="font-black text-base tracking-tight leading-tight">ADM TECHNO SOLUTION</div>
               <div className="text-[10px] tracking-[0.15em] text-yellow-400 font-bold uppercase">Master Admin Console</div>
             </div>
           </div>

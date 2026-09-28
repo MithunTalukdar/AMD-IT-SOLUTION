@@ -515,7 +515,7 @@ export default function ServicesPage() {
           </div>
         )}
 
-        {/* Why AMD IT SOLUTION Banner */}
+        {/* Why ADM TECHNO SOLUTION Banner */}
         <div className="mt-14 bg-gradient-to-r from-[#0a1e40] to-[#1e4a9a] rounded-[24px] p-6 md:p-10 text-white shadow-xl">
           <div className="grid md:grid-cols-12 gap-6 items-center">
             <div className="md:col-span-8">

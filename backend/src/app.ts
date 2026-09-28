@@ -73,7 +73,7 @@ app.use(async (req, res, next) => {
 
 // Health — both root and api prefix (evaluator checks both)
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', message: 'AMD IT SOLUTION is running', timestamp: new Date().toISOString() });
+  res.json({ status: 'ok', message: 'ADM TECHNO SOLUTION is running', timestamp: new Date().toISOString() });
 });
 app.use('/api', healthRoutes); // exposes /api/health
 app.use('/api/health', (req, res) => {
@@ -125,7 +125,7 @@ app.use('/api/settings', settingsRoutes);
 app.get('/', (req, res) => {
   res.json({
     success: true,
-    message: 'AMD IT SOLUTION API — Premium IT Services',
+    message: 'ADM TECHNO SOLUTION API — Premium IT Services',
     version: '1.0.0',
     endpoints: [
       'GET /health',

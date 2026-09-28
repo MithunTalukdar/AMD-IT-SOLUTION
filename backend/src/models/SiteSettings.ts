@@ -25,7 +25,7 @@ export interface ISiteSettings extends Document {
 
 const siteSettingsSchema = new mongoose.Schema<ISiteSettings>(
   {
-    siteName: { type: String, default: 'AMD IT SOLUTION' },
+    siteName: { type: String, default: 'ADM TECHNO SOLUTION' },
     tagline: { type: String, default: 'TECHNOLOGY PARTNER' },
     logoUrl: { type: String, default: '' },
     contactPhone: { type: String, default: '9635006403' },
@@ -41,7 +41,7 @@ const siteSettingsSchema = new mongoose.Schema<ISiteSettings>(
     },
     heroTitle: { type: String, default: 'PREMIUM IT SOLUTIONS FOR YOUR BUSINESS' },
     heroSubtitle: { type: String, default: 'CCTV • Computer & Laptop • Networking • AMC' },
-    seoTitle: { type: String, default: 'AMD IT SOLUTION — Premium IT Services, CCTV, Networking & AMC' },
+    seoTitle: { type: String, default: 'ADM TECHNO SOLUTION — Premium IT Services, CCTV, Networking & AMC' },
     seoDescription: { type: String, default: 'Your trusted IT partner for CCTV, Computer/Laptop, Networking & AMC services.' },
     maintenanceMode: { type: Boolean, default: false },
     updatedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

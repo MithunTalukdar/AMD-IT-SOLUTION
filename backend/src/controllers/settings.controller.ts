@@ -8,7 +8,7 @@ export const getSettings = asyncHandler(async (req: Request, res: Response) => {
     return res.json({
       success: true,
       data: {
-        siteName: 'AMD IT SOLUTION',
+        siteName: 'ADM TECHNO SOLUTION',
         tagline: 'TECHNOLOGY PARTNER',
         contactPhone: '9635006403',
         contactEmail: 'itsolutions.amd@gmail.com',

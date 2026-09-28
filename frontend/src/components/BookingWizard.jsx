@@ -263,7 +263,7 @@ export default function BookingWizard({ onSuccess }) {
         key: keyId,
         amount: Math.round(amount * 100),
         currency,
-        name: 'AMD IT SOLUTION',
+        name: 'ADM TECHNO SOLUTION',
         description: booking.service?.title || form.serviceObj?.title || 'Service Booking',
         order_id: orderId,
         prefill: {

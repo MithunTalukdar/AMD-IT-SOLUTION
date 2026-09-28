@@ -62,7 +62,7 @@ export default function Navbar() {
           </div>
           <div className="leading-none">
             <div className="font-black text-[#0a1e40] text-lg md:text-xl tracking-tight">
-              AMD <span className="text-[#1e4a9a]">IT</span> SOLUTION
+              ADM <span className="text-[#1e4a9a]">TECHNO</span> SOLUTION
             </div>
             <div className="text-[10px] md:text-xs tracking-[0.18em] text-slate-500 font-bold">
               {isAdmin ? 'ADMINISTRATION PORTAL' : 'TECHNOLOGY PARTNER'}

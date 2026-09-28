@@ -40,7 +40,7 @@ export default function Contact() {
 
     const serviceLabel = SERVICE_NAMES[form.serviceType] || form.serviceType;
     const msg = 
-`🔔 *NEW QUOTE REQUEST - AMD IT SOLUTION*
+`🔔 *NEW QUOTE REQUEST - ADM TECHNO SOLUTION*
 ━━━━━━━━━━━━━━━━━━━━
 👤 *Customer Name:* ${form.name.trim()}
 📱 *Phone Number:* ${form.phone.trim()}

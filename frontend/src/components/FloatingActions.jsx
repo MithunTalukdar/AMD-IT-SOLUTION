@@ -14,12 +14,12 @@ export default function FloatingActions() {
           </div>
         )}
         <a
-          href="https://wa.me/919635006403?text=Hello%20AMD%20IT%20SOLUTION,%20I%20would%20like%20to%20inquire%20about%20your%20services."
+          href="https://wa.me/919635006403?text=Hello%20ADM%20TECHNO%20SOLUTION,%20I%20would%20like%20to%20inquire%20about%20your%20services."
           target="_blank"
           rel="noopener noreferrer"
           onMouseEnter={() => setHovered('whatsapp')}
           onMouseLeave={() => setHovered(null)}
-          aria-label="Direct WhatsApp Message to AMD IT SOLUTION"
+          aria-label="Direct WhatsApp Message to ADM TECHNO SOLUTION"
           className="w-13 h-13 md:w-14 md:h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-[0_8px_25px_rgba(37,211,102,0.45)] hover:scale-110 active:scale-95 transition-all duration-300 relative group"
         >
           {/* Subtle ping aura */}

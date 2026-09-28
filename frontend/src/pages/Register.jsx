@@ -30,7 +30,7 @@ export default function Register() {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-10">
       <form onSubmit={submit} className="w-full max-w-md bg-white rounded-[24px] border border-slate-200 shadow-xl p-6 md:p-8">
         <h1 className="text-2xl font-black text-[#0a1e40] text-center">Create Account</h1>
-        <p className="text-sm text-slate-500 text-center">Join AMD IT SOLUTION</p>
+        <p className="text-sm text-slate-500 text-center">Join ADM TECHNO SOLUTION</p>
         {err && <div className="mt-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-2">{err}</div>}
         <div className="mt-5 space-y-3">
           <input placeholder="Full Name *" value={form.fullname} onChange={e => setForm({ ...form, fullname: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#1e4a9a]" required />

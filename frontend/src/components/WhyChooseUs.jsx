@@ -11,7 +11,7 @@ export default function WhyChooseUs() {
     <section className="bg-[#0a1e40] text-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16 grid lg:grid-cols-2 gap-8 md:gap-10 items-center">
         <div>
-          <div className="inline-flex bg-yellow-400 text-[#0a1e40] font-black text-xs px-3 py-1 rounded-full">WHY AMD IT SOLUTION</div>
+          <div className="inline-flex bg-yellow-400 text-[#0a1e40] font-black text-xs px-3 py-1 rounded-full">WHY ADM TECHNO SOLUTION</div>
           <h2 className="mt-3 text-2xl md:text-4xl font-black leading-tight">Why Businesses <span className="text-yellow-400">Trust Us</span></h2>
           <p className="mt-3 text-sm md:text-base text-slate-300 max-w-xl">We don’t just install — we become your long-term technology partner. From small shops to large offices.</p>
 
@@ -32,7 +32,7 @@ export default function WhyChooseUs() {
               <img src="https://i.pravatar.cc/100?img=12" className="w-12 h-12 rounded-full object-cover" alt="founder" />
               <div>
                 <div className="font-black">Mithun Talukdar</div>
-                <div className="text-xs text-slate-500">Founder, AMD IT SOLUTION</div>
+                <div className="text-xs text-slate-500">Founder, ADM TECHNO SOLUTION</div>
               </div>
               <span className="ml-auto bg-[#0a1e40] text-yellow-400 text-xs font-black px-3 py-1 rounded-full">Since 2012</span>
             </div>

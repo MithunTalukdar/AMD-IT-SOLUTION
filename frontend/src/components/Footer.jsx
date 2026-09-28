@@ -8,14 +8,14 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 grid place-items-center text-white font-black">A</div>
             <div>
-              <div className="font-black text-white leading-none">AMD IT SOLUTION</div>
+              <div className="font-black text-white leading-none">ADM TECHNO SOLUTION</div>
               <div className="text-[11px] tracking-[0.15em] text-slate-400">TECHNOLOGY PARTNER</div>
             </div>
           </div>
           <p className="mt-4 text-sm leading-relaxed">Kolkata’s trusted IT partner since 2012. CCTV, computers, networking & AMC — one call, all solutions.</p>
           <div className="mt-4 flex gap-3">
             <a
-              href="https://wa.me/919635006403?text=Hello%20AMD%20IT%20SOLUTION,%20I%20would%20like%20to%20inquire%20about%20your%20services."
+              href="https://wa.me/919635006403?text=Hello%20ADM%20TECHNO%20SOLUTION,%20I%20would%20like%20to%20inquire%20about%20your%20services."
               target="_blank"
               rel="noreferrer"
               aria-label="WhatsApp"
@@ -75,7 +75,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex flex-wrap justify-between gap-3 text-xs">
-          <div>© {new Date().getFullYear()} AMD IT SOLUTION. All rights reserved. • GSTIN: 19BAAPK5344N1ZD • Certified Partner</div>
+          <div>© {new Date().getFullYear()} ADM TECHNO SOLUTION. All rights reserved. • GSTIN: 19BAAPK5344N1ZD • Certified Partner</div>
           <div className="flex gap-3">
             <span>🔒 Secure</span>
             <span>✓ Verified</span>
