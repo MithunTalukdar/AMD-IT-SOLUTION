@@ -71,7 +71,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<ServicesPage />} />
-              <Route path="/booking" element={<BookingPage />} />
+              <Route path="/booking" element={<ProtectedRoute roles={['customer','admin','technician']}><BookingPage /></ProtectedRoute>} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/customer/bookings" element={<ProtectedRoute roles={['customer','admin']}><CustomerDashboard /></ProtectedRoute>} />

@@ -400,6 +400,45 @@ export default function BookingWizard({ onSuccess }) {
     );
   }
 
+  // Lock booking facility completely for non-logged-in visitors
+  if (!token || !user) {
+    return (
+      <div className="bg-white rounded-[24px] border border-slate-200 shadow-xl p-8 md:p-12 text-center max-w-xl mx-auto">
+        <div className="w-20 h-20 bg-amber-50 text-amber-500 rounded-3xl flex items-center justify-center text-4xl mx-auto shadow-inner border border-amber-200">
+          🔒
+        </div>
+        <h2 className="mt-5 text-2xl md:text-3xl font-black text-[#0a1e40]">Login Required for Booking</h2>
+        <p className="mt-3 text-slate-600 leading-relaxed text-sm md:text-base">
+          To access our instant booking facility, schedule technician visits, and view live service slots, please sign in to your account.
+        </p>
+
+        <div className="mt-8 flex flex-col sm:flex-row gap-3.5 justify-center">
+          <Link
+            to={`/login?redirect=${encodeURIComponent(returnTo)}`}
+            state={{ from: returnTo }}
+            className="px-8 py-3.5 rounded-xl bg-[#0a1e40] hover:bg-[#1e4a9a] text-white font-bold transition shadow-lg flex items-center justify-center gap-2"
+          >
+            <span>Login to Continue</span>
+            <span>→</span>
+          </Link>
+          <Link
+            to={`/register?redirect=${encodeURIComponent(returnTo)}`}
+            state={{ from: returnTo }}
+            className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-[#0a1e40] font-black transition shadow-lg flex items-center justify-center"
+          >
+            Create Free Account
+          </Link>
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-center gap-6 text-xs font-semibold text-slate-500">
+          <span>✓ Instant Slot Confirmation</span>
+          <span>✓ Verified Technicians</span>
+          <span>✓ Zero Advance Required</span>
+        </div>
+      </div>
+    );
+  }
+
   const steps = ['Service', 'Date', 'Time', 'Details', 'Address', 'Summary'];
 
   return (
