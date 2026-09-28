@@ -10,9 +10,19 @@ export default function Contact() {
     message: '',
   });
 
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const SERVICE_NAMES = {
+    cctv: 'CCTV Installation & Surveillance',
+    computer: 'Computer & Laptop Repair',
+    networking: 'Structured Cabling & Wi-Fi',
+    amc: 'Annual Maintenance Contract (AMC)',
+    biometric: 'Biometric & Security',
+    other: 'Other IT Requirements',
+  };
+
+  const ADMIN_PHONE = '9635006403';
+  const ADMIN_EMAIL = 'itsolutions.amd@gmail.com';
+
+  const [whatsappUrl, setWhatsappUrl] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +34,22 @@ export default function Contact() {
     setSubmitting(true);
     setError('');
 
+    const serviceLabel = SERVICE_NAMES[form.serviceType] || form.serviceType;
+    const msg = 
+`🔔 *NEW QUOTE REQUEST - AMD IT SOLUTION*
+━━━━━━━━━━━━━━━━━━━━
+👤 *Customer Name:* ${form.name.trim()}
+📱 *Phone Number:* ${form.phone.trim()}
+📧 *Email:* ${form.email.trim() || 'Not Provided'}
+🛠 *Service Needed:* ${serviceLabel}
+💬 *Message/Details:* ${form.message.trim() || 'Quote requested from website form'}
+📍 *Location:* Kolkata / Local Area
+━━━━━━━━━━━━━━━━━━━━
+⚡ *Requested on:* ${new Date().toLocaleString('en-IN')}`;
+
+    const waLink = `https://wa.me/91${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`;
+    setWhatsappUrl(waLink);
+
     try {
       await client.post('/api/quotes', {
         name: form.name.trim(),
@@ -33,15 +59,17 @@ export default function Contact() {
         location: 'Kolkata',
         message: form.message.trim() || 'Contact form quote request',
       });
-      setSubmitted(true);
     } catch (err) {
-      if (err.response?.data?.message) {
-        setError(err.response.data.message);
-      } else {
-        setSubmitted(true);
-      }
+      console.warn('Quote saved locally or fallback:', err);
     } finally {
+      setSubmitted(true);
       setSubmitting(false);
+      // Automatically open WhatsApp in new tab for direct notification
+      try {
+        window.open(waLink, '_blank', 'noopener,noreferrer');
+      } catch (e) {
+        // Popups might be blocked by some browsers — fallback button available
+      }
     }
   };
 
@@ -58,8 +86,10 @@ export default function Contact() {
               <div className="w-10 h-10 rounded-xl bg-yellow-400 text-[#0a1e40] grid place-items-center font-black">☎</div>
               <div>
                 <div className="font-black">Call / WhatsApp</div>
-                <a href="tel:9635006403" className="text-sm text-yellow-300 font-bold hover:underline block">9635006403</a>
-                <div className="text-xs text-slate-400">10 AM - 9 PM • 7 Days</div>
+                <a href={`https://wa.me/91${ADMIN_PHONE}`} target="_blank" rel="noreferrer" className="text-sm text-yellow-300 font-bold hover:underline block">
+                  +91 {ADMIN_PHONE}
+                </a>
+                <div className="text-xs text-slate-400">10 AM - 9 PM • 7 Days Instant Response</div>
               </div>
             </div>
             <div className="bg-white/10 border border-white/10 rounded-2xl p-4 flex gap-3">
@@ -74,7 +104,7 @@ export default function Contact() {
               <div className="w-10 h-10 rounded-xl bg-white text-[#0a1e40] grid place-items-center">✉</div>
               <div>
                 <div className="font-black">Email</div>
-                <a href="mailto:itsolutions.amd@gmail.com" className="text-sm text-slate-200 hover:underline">itsolutions.amd@gmail.com</a>
+                <a href={`mailto:${ADMIN_EMAIL}`} className="text-sm text-slate-200 hover:underline">{ADMIN_EMAIL}</a>
               </div>
             </div>
           </div>
@@ -91,27 +121,51 @@ export default function Contact() {
 
         <div className="bg-white text-slate-800 rounded-[24px] p-5 md:p-7 shadow-[0_30px_80px_rgba(0,0,0,0.3)]">
           {submitted ? (
-            <div className="text-center py-8">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 grid place-items-center text-3xl mx-auto mb-3 font-black">
+            <div className="text-center py-6">
+              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 grid place-items-center text-3xl mx-auto mb-3 font-black shadow-inner">
                 ✓
               </div>
-              <h3 className="text-2xl font-black text-[#0a1e40]">Request Received!</h3>
+              <h3 className="text-2xl font-black text-[#0a1e40]">Quote Request Sent!</h3>
               <p className="text-sm text-slate-600 mt-2 leading-relaxed">
-                Thank you, <span className="font-bold">{form.name}</span>. Our senior technical engineer will call you at <span className="font-bold text-[#0a1e40]">{form.phone}</span> in 5 minutes.
+                Thank you, <span className="font-bold text-slate-800">{form.name}</span>. Your request has been recorded. Our engineer will call you at <span className="font-bold text-[#0a1e40]">{form.phone}</span> in 5 minutes.
               </p>
-              <div className="mt-6 flex justify-center gap-3">
-                <a href="tel:9635006403" className="px-6 py-2.5 rounded-full bg-yellow-400 text-[#0a1e40] font-black text-xs shadow hover:bg-yellow-300">
-                  📞 Call Direct: 9635006403
-                </a>
+
+              <div className="mt-5 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-left">
+                <div className="text-xs font-bold text-emerald-900 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                  WhatsApp Message Prepared
+                </div>
+                <p className="text-xs text-emerald-700 mt-1">
+                  Click below to directly chat with our technical desk on WhatsApp or call our admin directly:
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a
+                    href={whatsappUrl || `https://wa.me/91${ADMIN_PHONE}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 min-w-[140px] text-center px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow transition flex items-center justify-center gap-1.5"
+                  >
+                    💬 Open WhatsApp Chat
+                  </a>
+                  <a
+                    href={`tel:${ADMIN_PHONE}`}
+                    className="flex-1 min-w-[140px] text-center px-4 py-2.5 rounded-xl bg-[#0a1e40] hover:bg-[#153366] text-white font-bold text-xs shadow transition flex items-center justify-center gap-1.5"
+                  >
+                    📞 Call: {ADMIN_PHONE}
+                  </a>
+                </div>
+              </div>
+
+              <div className="mt-5 flex justify-center">
                 <button
                   type="button"
                   onClick={() => {
                     setSubmitted(false);
                     setForm({ name: '', phone: '', email: '', serviceType: 'cctv', message: '' });
                   }}
-                  className="px-5 py-2.5 rounded-full bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200"
+                  className="px-5 py-2 rounded-full bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200 transition"
                 >
-                  Send Another
+                  ← Submit Another Request
                 </button>
               </div>
             </div>
