@@ -32,33 +32,131 @@ export default function Login() {
     return q && q.startsWith('/') ? q : '';
   })();
 
+  const cleanErrorMessage = (error) => {
+    const rawMsg =
+      error?.response?.data?.message ||
+      error?.response?.data?.errors?.[0]?.message ||
+      error?.message ||
+      '';
+
+    if (rawMsg.includes('buffering timed out') || rawMsg.includes('MongooseError') || rawMsg.includes('MongoServerSelectionError')) {
+      return 'Database connection is taking longer than expected. Please try again.';
+    }
+    if (rawMsg) return rawMsg;
+    return 'Unable to sign in. Please check your email and password.';
+  };
+
   const submit = async (e) => {
-    e.preventDefault(); setErr(''); setLoading(true);
+    e.preventDefault();
+    setErr('');
+
+    if (!form.email.trim()) {
+      setErr('Please enter your email address.');
+      return;
+    }
+    if (!form.password) {
+      setErr('Please enter your password.');
+      return;
+    }
+
+    setLoading(true);
     try {
-      const u = await login(form.email, form.password);
+      const u = await login(form.email.trim(), form.password);
       nav(resolveDestination(loc, u), { replace: true });
-    } catch (e) { setErr(e.response?.data?.message || 'Unable to connect to server. Please try again.'); } finally { setLoading(false); }
+    } catch (e) {
+      setErr(cleanErrorMessage(e));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-10">
-      <form onSubmit={submit} className="w-full max-w-md bg-white rounded-[24px] border border-slate-200 shadow-xl p-6 md:p-8">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-10 relative">
+      <form onSubmit={submit} className="w-full max-w-md bg-white rounded-[24px] border border-slate-200 shadow-xl p-6 md:p-8 relative overflow-hidden">
+        {loading && (
+          <div className="absolute top-0 left-0 right-0 h-1 bg-blue-200 overflow-hidden">
+            <div className="h-full bg-[#1e4a9a] animate-pulse w-full"></div>
+          </div>
+        )}
+
         <div className="text-center">
-          <div className="w-12 h-12 rounded-xl bg-[#0a1e40] text-white grid place-items-center font-black mx-auto">A</div>
+          <div className="w-12 h-12 rounded-xl bg-[#0a1e40] text-amber-400 grid place-items-center font-black mx-auto text-xl shadow-md">
+            A
+          </div>
           <h1 className="mt-3 text-2xl font-black text-[#0a1e40]">Welcome Back</h1>
           <p className="text-sm text-slate-500">Login to manage your bookings</p>
           {pendingRedirect.startsWith('/booking') && (
-            <p className="mt-2 text-xs bg-blue-50 border border-blue-200 text-blue-800 rounded-xl px-3 py-2">Please login to continue your booking — you&apos;ll return to it automatically.</p>
+            <p className="mt-2 text-xs bg-blue-50 border border-blue-200 text-blue-800 rounded-xl px-3 py-2">
+              Please login to continue your booking — you&apos;ll return to it automatically.
+            </p>
           )}
         </div>
-        {err && <div className="mt-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-2">{err}</div>}
-        <div className="mt-5 space-y-3">
-          <input placeholder="Email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#1e4a9a]" required />
-          <input placeholder="Password" type="password" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#1e4a9a]" required />
-          <button disabled={loading} className="w-full py-3 rounded-xl bg-[#0a1e40] text-white font-black disabled:opacity-60">{loading ? 'Signing in…' : 'Login →'}</button>
+
+        {err && (
+          <div className="mt-4 bg-red-50 border border-red-200 text-red-800 text-sm rounded-xl px-4 py-3 flex items-start justify-between gap-2 shadow-sm animate-in fade-in duration-200">
+            <div className="flex items-start gap-2">
+              <span className="text-red-500 font-bold mt-0.5">⚠️</span>
+              <span className="leading-snug">{err}</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setErr('')}
+              className="text-red-400 hover:text-red-700 font-bold text-base leading-none p-1 transition"
+              aria-label="Dismiss error"
+            >
+              ×
+            </button>
+          </div>
+        )}
+
+        <div className="mt-5 space-y-3.5">
+          <div>
+            <label className="block text-xs font-semibold text-slate-600 mb-1">Email Address</label>
+            <input
+              type="email"
+              placeholder="name@example.com"
+              value={form.email}
+              disabled={loading}
+              onChange={e => setForm({ ...form, email: e.target.value })}
+              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#1e4a9a] focus:bg-white transition disabled:opacity-60"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-slate-600 mb-1">Password</label>
+            <input
+              placeholder="Your password"
+              type="password"
+              value={form.password}
+              disabled={loading}
+              onChange={e => setForm({ ...form, password: e.target.value })}
+              className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#1e4a9a] focus:bg-white transition disabled:opacity-60"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3.5 rounded-xl bg-[#0a1e40] hover:bg-[#122e5e] text-white font-black shadow-md transition disabled:opacity-60 flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed mt-2"
+          >
+            {loading ? (
+              <>
+                <svg className="animate-spin h-5 w-5 text-amber-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Signing in…</span>
+              </>
+            ) : (
+              <span>Login →</span>
+            )}
+          </button>
         </div>
-        <div className="mt-4 text-center text-sm">
-          No account? <Link to={pendingRedirect ? `/register?redirect=${encodeURIComponent(pendingRedirect)}` : '/register'} state={pendingRedirect ? { from: pendingRedirect } : undefined} className="text-[#1e4a9a] font-bold">Register</Link>
+
+        <div className="mt-4 text-center text-sm text-slate-600">
+          No account? <Link to={pendingRedirect ? `/register?redirect=${encodeURIComponent(pendingRedirect)}` : '/register'} state={pendingRedirect ? { from: pendingRedirect } : undefined} className="text-[#1e4a9a] font-bold hover:underline">Register</Link>
         </div>
 
         {/* Quick 1-click credentials */}

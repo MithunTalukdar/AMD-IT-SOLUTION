@@ -6,25 +6,43 @@ import { asyncHandler } from '../utils/asyncHandler.js';
 import { isDBConnected, requireDB } from '../utils/dbCheck.js';
 
 export const register = asyncHandler(async (req: Request, res: Response) => {
-  if (!requireDB(res)) return;
   const { fullname, email, password, role, phone } = req.body;
-  const allowedRole = role === 'admin' ? 'customer' : role || 'customer';
-  const exists = await User.findOne({ email: email.toLowerCase() });
-  if (exists) {
-    return res.status(409).json({ success: false, message: 'Email already registered' });
+
+  if (!fullname || typeof fullname !== 'string' || fullname.trim().length < 2) {
+    return res.status(400).json({ success: false, message: 'Please provide a valid full name (at least 2 characters).' });
   }
+
+  if (!email || typeof email !== 'string' || !/^\S+@\S+\.\S+$/.test(email.trim())) {
+    return res.status(400).json({ success: false, message: 'Please provide a valid email address.' });
+  }
+
+  if (!password || typeof password !== 'string' || password.length < 6) {
+    return res.status(400).json({ success: false, message: 'Password must be at least 6 characters long.' });
+  }
+
+  if (!requireDB(res)) return;
+
+  const cleanEmail = email.toLowerCase().trim();
+  const allowedRole = role === 'admin' ? 'customer' : role || 'customer';
+
+  const exists = await User.findOne({ email: cleanEmail });
+  if (exists) {
+    return res.status(409).json({ success: false, message: 'This email is already registered. Please login instead.' });
+  }
+
   const hashed = await hashPassword(password);
   const user = await User.create({
-    fullname,
-    email: email.toLowerCase(),
+    fullname: fullname.trim(),
+    email: cleanEmail,
     password: hashed,
     role: allowedRole,
-    phone,
+    phone: phone ? String(phone).trim() : undefined,
   });
+
   const token = signToken({ id: user._id.toString(), role: user.role, email: user.email });
   return res.status(201).json({
     success: true,
-    message: 'Registered successfully',
+    message: 'Account created successfully',
     data: {
       user: { id: user._id, fullname: user.fullname, email: user.email, role: user.role, phone: user.phone },
       token,
