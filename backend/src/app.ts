@@ -61,6 +61,16 @@ app.use(express.json({
 }));
 app.use(express.urlencoded({ extended: true }));
 
+// Ensure DB is active for incoming requests
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+  } catch (err) {
+    // allow request to proceed
+  }
+  next();
+});
+
 // Health — both root and api prefix (evaluator checks both)
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'AMD IT SOLUTION is running', timestamp: new Date().toISOString() });

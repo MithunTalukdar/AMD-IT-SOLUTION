@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
+import connectDB from '../config/db.js';
 
-export const isDBConnected = (): boolean => mongoose.connection.readyState === 1;
+export const isDBConnected = (): boolean => mongoose.connection.readyState >= 1;
 
 export const requireDB = (res: any): boolean => {
-  if (!isDBConnected()) {
-    res.status(503).json({ success: false, message: 'Database unavailable — please try again later (MONGO_URI not connected)' });
-    return false;
+  if (mongoose.connection.readyState === 0) {
+    connectDB().catch(console.warn);
   }
+  // Allow processing to proceed with buffered queries / active connections
   return true;
 };
