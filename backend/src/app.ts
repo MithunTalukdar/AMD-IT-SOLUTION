@@ -7,6 +7,10 @@ dotenv.config();
 
 import { notFound } from './middleware/notFound.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import connectDB from './config/db.js';
+
+// Ensure DB is initialized
+connectDB().catch(err => console.warn('MongoDB connection warning:', err?.message || err));
 
 import healthRoutes from './routes/health.routes.js';
 import authRoutes from './routes/auth.routes.js';

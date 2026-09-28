@@ -2,17 +2,23 @@ import axios from 'axios';
 
 // Accept both `http://host:5000` and `http://host:5000/api` env formats.
 // All call sites use the `/api/...` prefix, so normalize the base to the origin.
-function normalizeBase(raw) {
-  const fallback = 'http://localhost:5000';
-  let base = (raw || fallback).trim().replace(/\/+$/, '');
-  if (!base) return fallback;
-  if (!/^https?:\/\//i.test(base)) base = `https://${base}`;
-  // Strip a trailing `/api` (and any `/api/...` suffix) to avoid `/api/api/...`
-  base = base.replace(/\/api(\/.*)?$/i, '');
-  return base.replace(/\/+$/, '') || fallback;
+function getBaseUrl() {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl && envUrl.trim()) {
+    let base = envUrl.trim().replace(/\/+$/, '');
+    if (!/^https?:\/\//i.test(base)) base = `https://${base}`;
+    // Strip a trailing `/api` (and any `/api/...` suffix) to avoid `/api/api/...`
+    base = base.replace(/\/api(\/.*)?$/i, '');
+    return base.replace(/\/+$/, '');
+  }
+  // In production (e.g. Vercel same-domain deployment), fallback to relative URL
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return '';
+  }
+  return 'http://localhost:5000';
 }
 
-const API = normalizeBase(import.meta.env.VITE_API_URL);
+const API = getBaseUrl();
 
 const client = axios.create({
   baseURL: API,
