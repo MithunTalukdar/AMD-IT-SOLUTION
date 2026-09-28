@@ -37,10 +37,6 @@ export default function Register() {
           <input placeholder="Email *" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none" required />
           <input placeholder="Password (min 6) *" type="password" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none" required />
           <input placeholder="Phone" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none" />
-          <select value={form.role} onChange={e => setForm({ ...form, role: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none">
-            <option value="customer">Customer</option>
-            <option value="technician">Technician (request)</option>
-          </select>
           <button disabled={loading} className="w-full py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 text-[#0a1e40] font-black disabled:opacity-60">{loading ? 'Creating…' : 'Create Account →'}</button>
         </div>
         <div className="mt-4 text-center text-sm">Have account? <Link to="/login" className="text-[#1e4a9a] font-bold">Login</Link></div>

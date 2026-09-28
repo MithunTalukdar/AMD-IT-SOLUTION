@@ -3,8 +3,8 @@ dotenv.config();
 
 export const env = {
   PORT: parseInt(process.env.PORT || '5000', 10),
-  MONGO_URI: process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/amd_it_solution',
-  JWT_SECRET: process.env.JWT_SECRET || 'fallback_secret_change_me',
+  MONGO_URI: process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb+srv://mithuntalukdar2003_db_user:89fF2BIUFE6YENfM@cluster0.ob3ijdr.mongodb.net/amd_it_solution?retryWrites=true&w=majority',
+  JWT_SECRET: process.env.JWT_SECRET || 'amd_it_solution_dev_secret_2026_change_in_prod_32chars!',
   JWT_EXPIRE: process.env.JWT_EXPIRE || '7d',
   CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:5173',
   NODE_ENV: process.env.NODE_ENV || 'development',

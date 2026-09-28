@@ -7,7 +7,7 @@ const connectDB = async (): Promise<void> => {
     return;
   }
 
-  const uri = (process.env.MONGODB_URI || process.env.MONGO_URI || '').trim() || 'mongodb://127.0.0.1:27017/amd_it_solution';
+  const uri = (process.env.MONGODB_URI || process.env.MONGO_URI || '').trim() || 'mongodb+srv://mithuntalukdar2003_db_user:89fF2BIUFE6YENfM@cluster0.ob3ijdr.mongodb.net/amd_it_solution?retryWrites=true&w=majority';
 
   if (!cachedPromise || mongoose.connection.readyState === 0) {
     cachedPromise = mongoose.connect(uri, {

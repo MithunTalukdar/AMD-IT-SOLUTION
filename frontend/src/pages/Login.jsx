@@ -64,24 +64,15 @@ export default function Login() {
         {/* Quick 1-click credentials */}
         <div className="mt-5 pt-4 border-t border-slate-100">
           <div className="text-xs font-bold text-slate-500 uppercase tracking-wider text-center mb-2.5">
-            Quick Fill Demo Accounts:
+            Quick Fill Demo Account:
           </div>
-          <div className="grid grid-cols-2 gap-2 text-xs">
-            <button
-              type="button"
-              onClick={() => setForm({ email: 'admin@amditsolution.in', password: 'Admin@123456' })}
-              className="p-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-800 font-bold border border-red-200 transition text-center"
-            >
-              👑 Fill Admin
-            </button>
-            <button
-              type="button"
-              onClick={() => setForm({ email: 'technician@amditsolution.in', password: 'Tech@123456' })}
-              className="p-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 font-bold border border-blue-200 transition text-center"
-            >
-              🔧 Fill Technician
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setForm({ email: 'admin@amditsolution.in', password: 'Admin@123456' })}
+            className="w-full p-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-800 font-bold border border-red-200 transition text-center text-xs"
+          >
+            👑 Fill Admin Credentials
+          </button>
         </div>
       </form>
     </div>
