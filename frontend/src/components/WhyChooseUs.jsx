@@ -31,7 +31,7 @@ export default function WhyChooseUs() {
             <div className="flex items-center gap-3">
               <img src="https://i.pravatar.cc/100?img=12" className="w-12 h-12 rounded-full object-cover" alt="founder" />
               <div>
-                <div className="font-black">Mithun Talukdar</div>
+                <div className="font-black">Subho Mistry</div>
                 <div className="text-xs text-slate-500">Founder, ADM TECHNO SOLUTION</div>
               </div>
               <span className="ml-auto bg-[#0a1e40] text-yellow-400 text-xs font-black px-3 py-1 rounded-full">Since 2012</span>

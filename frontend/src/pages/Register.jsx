@@ -121,7 +121,7 @@ export default function Register() {
           <div>
             <label className="block text-xs font-semibold text-slate-600 mb-1">Full Name</label>
             <input
-              placeholder="e.g. Mithun Talukdar"
+              placeholder="e.g. Subho Mistry"
               value={form.fullname}
               disabled={loading}
               onChange={e => setForm({ ...form, fullname: e.target.value })}
