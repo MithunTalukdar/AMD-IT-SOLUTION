@@ -43,7 +43,16 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-6 md:gap-8">
             <div className="flex -space-x-2">
               {[1,2,3,4].map(i => (
-                <img key={i} src={`https://i.pravatar.cc/100?img=${i+10}`} alt="client" className="w-8 h-8 md:w-9 md:h-9 rounded-full border-2 border-white object-cover" />
+                <img
+                  key={i}
+                  src={`https://i.pravatar.cc/100?img=${i+10}`}
+                  alt={`Verified business client ${i} in Kolkata`}
+                  width="36"
+                  height="36"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-8 h-8 md:w-9 md:h-9 rounded-full border-2 border-white object-cover"
+                />
               ))}
               <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-yellow-400 border-2 border-white grid place-items-center text-xs font-black text-[#0a1e40]">5k+</div>
             </div>
@@ -74,7 +83,16 @@ export default function Hero() {
 
               {/* Fake dashboard preview */}
               <div className="mt-4 rounded-2xl overflow-hidden bg-slate-50 border border-slate-200">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80" alt="IT service" className="w-full h-44 md:h-52 object-cover" />
+                <img
+                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80"
+                  alt="Certified CCTV surveillance installation by AMD IT SOLUTION in Kolkata"
+                  width="600"
+                  height="220"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="w-full h-44 md:h-52 object-cover"
+                />
                 <div className="p-3 flex items-center justify-between">
                   <div>
                     <div className="font-bold text-slate-800 text-sm">CCTV Installation — 4 Cam Setup</div>

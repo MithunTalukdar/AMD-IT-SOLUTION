@@ -1,0 +1,41 @@
+# ==============================================================================
+# ROBOTS.TXT — ADM TECHNO SOLUTION (AMD IT SOLUTION)
+# Target Domain: https://amditsolution.in
+# Strict Crawl Budget & Indexing Policy adhering to Google Search Central
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Allow: /services
+Allow: /services/*
+Allow: /about
+Allow: /contact
+Allow: /faq
+Allow: /privacy-policy
+Allow: /terms
+Allow: /assets/
+Allow: /favicon.svg
+Allow: /og-image.jpg
+Allow: /site.webmanifest
+
+# Shield Private, Administrative, User Portals & Transactional Endpoints
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /customer
+Disallow: /customer/*
+Disallow: /technician
+Disallow: /technician/*
+Disallow: /booking
+Disallow: /booking/*
+Disallow: /login
+Disallow: /register
+Disallow: /api/
+Disallow: /api/*
+
+# Block query parameters to avoid duplicate content crawl waste
+Disallow: /*?*search=*
+Disallow: /*?*token=*
+
+# Canonical Host & Dynamic Sitemap Directives
+Host: https://amditsolution.in
+Sitemap: https://amditsolution.in/sitemap.xml

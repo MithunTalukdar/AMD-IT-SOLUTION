@@ -12,13 +12,15 @@ export default function Footer() {
               <div className="text-[11px] tracking-[0.15em] text-slate-400">TECHNOLOGY PARTNER</div>
             </div>
           </div>
-          <p className="mt-4 text-sm leading-relaxed">Kolkata’s trusted IT partner since 2012. CCTV, computers, networking & AMC — one call, all solutions.</p>
+          <p className="mt-4 text-sm leading-relaxed">
+            Kolkata’s trusted IT partner since 2012. CCTV surveillance, computer/laptop repair, networking & AMC maintenance — one call, all solutions.
+          </p>
           <div className="mt-4 flex gap-3">
             <a
               href="https://wa.me/919635006403?text=Hello%20ADM%20TECHNO%20SOLUTION,%20I%20would%20like%20to%20inquire%20about%20your%20services."
               target="_blank"
               rel="noreferrer"
-              aria-label="WhatsApp"
+              aria-label="Direct WhatsApp Message"
               className="w-9 h-9 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 transition shadow-md"
             >
               <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -28,7 +30,7 @@ export default function Footer() {
             </a>
             <a
               href="tel:9635006403"
-              aria-label="Direct Phone Call"
+              aria-label="Direct Phone Call 9635006403"
               className="w-9 h-9 rounded-full bg-white/15 text-white flex items-center justify-center hover:bg-yellow-400 hover:text-[#0a1e40] transition shadow-md"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
@@ -39,33 +41,34 @@ export default function Footer() {
         </div>
 
         <div>
-          <div className="font-black text-white">Services</div>
+          <div className="font-black text-white">Service Silos</div>
           <ul className="mt-3 space-y-2 text-sm">
-            <li><Link to="/services" className="hover:text-yellow-400">All Services Catalogue →</Link></li>
-            <li><Link to="/services?category=cctv" className="hover:text-yellow-400">CCTV Surveillance</Link></li>
-            <li><Link to="/services?category=computer" className="hover:text-yellow-400">Computer & Laptop</Link></li>
-            <li><Link to="/services?category=networking" className="hover:text-yellow-400">Networking & Wi-Fi</Link></li>
-            <li><Link to="/services?category=amc" className="hover:text-yellow-400">AMC Maintenance</Link></li>
-            <li><Link to="/services?category=biometric" className="hover:text-yellow-400">Access Control & Biometric</Link></li>
+            <li><Link to="/services" className="hover:text-yellow-400 font-bold">All Services Catalogue →</Link></li>
+            <li><Link to="/services/cctv" className="hover:text-yellow-400">CCTV Camera Installation</Link></li>
+            <li><Link to="/services/computer" className="hover:text-yellow-400">Computer & Laptop Repair</Link></li>
+            <li><Link to="/services/networking" className="hover:text-yellow-400">Networking & Wi-Fi Mesh</Link></li>
+            <li><Link to="/services/amc" className="hover:text-yellow-400">Annual Maintenance Contracts (AMC)</Link></li>
+            <li><Link to="/services/biometric" className="hover:text-yellow-400">Biometric Attendance & Access</Link></li>
           </ul>
         </div>
 
         <div>
-          <div className="font-black text-white">Quick Links</div>
+          <div className="font-black text-white">Company & Information</div>
           <ul className="mt-3 space-y-2 text-sm">
-            <li><Link to="/booking" className="hover:text-yellow-400 font-bold">Book a Service</Link></li>
-            <li><Link to="/#gallery" className="hover:text-yellow-400">Project Gallery</Link></li>
-            <li><Link to="/#why-us" className="hover:text-yellow-400">Why Choose Us</Link></li>
-            <li><Link to="/#faq" className="hover:text-yellow-400">FAQs</Link></li>
-            <li><Link to="/#contact" className="hover:text-yellow-400">Contact Support</Link></li>
+            <li><Link to="/about" className="hover:text-yellow-400 font-bold">About Our Company</Link></li>
+            <li><Link to="/contact" className="hover:text-yellow-400">Contact & Support Desk</Link></li>
+            <li><Link to="/faq" className="hover:text-yellow-400">Frequently Asked Questions</Link></li>
+            <li><Link to="/booking" className="hover:text-yellow-400">Book Doorstep Service</Link></li>
+            <li><Link to="/privacy-policy" className="hover:text-yellow-400 text-xs text-slate-400">Privacy Policy</Link></li>
+            <li><Link to="/terms" className="hover:text-yellow-400 text-xs text-slate-400">Terms of Service</Link></li>
           </ul>
         </div>
 
         <div>
-          <div className="font-black text-white">Get in Touch</div>
+          <div className="font-black text-white">Central Helpdesk</div>
           <div className="mt-3 space-y-2 text-sm">
-            <div>📞 9635006403</div>
-            <div>✉ itsolutions.amd@gmail.com</div>
+            <div>📞 <a href="tel:9635006403" className="hover:underline">9635006403</a></div>
+            <div>✉ <a href="mailto:itsolutions.amd@gmail.com" className="hover:underline">itsolutions.amd@gmail.com</a></div>
             <div>📍 24 T C Road, Kolkata - 700053</div>
             <div className="mt-3 bg-yellow-400 text-[#0a1e40] rounded-full px-4 py-2 font-black inline-flex">Mon - Sun: 10 AM - 9 PM</div>
           </div>
@@ -74,11 +77,11 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex flex-wrap justify-between gap-3 text-xs">
-          <div>© {new Date().getFullYear()} ADM TECHNO SOLUTION. All rights reserved. • Certified Partner</div>
-          <div className="flex gap-3">
-            <span>🔒 Secure</span>
-            <span>✓ Verified</span>
-            <span>⭐ 4.9/5 Rated</span>
+          <div>© {new Date().getFullYear()} ADM TECHNO SOLUTION (AMD IT SOLUTION). All rights reserved. • ISO 9001 Certified Quality</div>
+          <div className="flex gap-4">
+            <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+            <Link to="/terms" className="hover:underline">Terms of Service</Link>
+            <span className="text-yellow-400">⭐ 4.9/5 Rated on Google</span>
           </div>
         </div>
       </div>

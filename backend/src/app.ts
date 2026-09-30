@@ -24,6 +24,7 @@ import reviewRoutes from './routes/review.routes.js';
 import amcRoutes from './routes/amc.routes.js';
 import couponRoutes from './routes/coupon.routes.js';
 import settingsRoutes from './routes/settings.routes.js';
+import seoRoutes from './routes/seo.routes.js';
 
 const app = express();
 
@@ -83,6 +84,10 @@ app.use('/api/health', (req, res) => {
   }
   // let healthRoutes handle
 });
+
+// Dynamic SEO Endpoints (sitemap.xml, robots.txt)
+app.use('/', seoRoutes);
+app.use('/api', seoRoutes);
 
 // Auth
 app.use('/api/auth', authRoutes);

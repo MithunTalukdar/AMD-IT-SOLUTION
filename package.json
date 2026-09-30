@@ -15,10 +15,10 @@
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "build:frontend": "npm --prefix frontend run build",
     "build:backend": "npm --prefix backend run build",
-    "build": "npm run build:frontend; npm run build:backend",
+    "build": "node build-all.js",
     "start:backend": "npm --prefix backend start",
     "lint:frontend": "npm --prefix frontend run lint",
-    "vercel-build": "npm --prefix backend run build && npm --prefix frontend run build"
+    "vercel-build": "node build-all.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

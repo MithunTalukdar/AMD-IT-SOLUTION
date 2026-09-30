@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import SEO from '../components/SEO';
 
 export default function Register() {
   const { register } = useAuth();
@@ -83,6 +84,12 @@ export default function Register() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-10 relative">
+      <SEO
+        title="Create Customer Account | AMD IT SOLUTION"
+        description="Register an account with AMD IT SOLUTION to book and track doorstep services."
+        canonicalPath="/register"
+        noindex={true}
+      />
       <form onSubmit={submit} className="w-full max-w-md bg-white rounded-[24px] border border-slate-200 shadow-xl p-6 md:p-8 relative overflow-hidden">
         {/* Top subtle progress bar when loading */}
         {loading && (

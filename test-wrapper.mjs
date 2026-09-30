@@ -36,6 +36,21 @@ server.listen(0, async () => {
     console.log("POST /api/auth/login empty body status:", res5.status);
     console.log("body:", (await res5.text()).slice(0,300));
 
+    // Test /sitemap.xml
+    const resSitemap = await fetch(`http://127.0.0.1:${port}/sitemap.xml`);
+    console.log("GET /sitemap.xml status:", resSitemap.status, "content-type:", resSitemap.headers.get("content-type"));
+    const sitemapText = await resSitemap.text();
+    console.log("Sitemap valid XML:", sitemapText.includes("<?xml") && sitemapText.includes("https://amditsolution.in"));
+
+    // Test /robots.txt
+    const resRobots = await fetch(`http://127.0.0.1:${port}/robots.txt`);
+    console.log("GET /robots.txt status:", resRobots.status, "content-type:", resRobots.headers.get("content-type"));
+    const robotsText = await resRobots.text();
+    console.log("Robots valid text:", robotsText.includes("User-agent: *") && robotsText.includes("Sitemap:"));
+
   } catch(e){ console.error(e); }
-  finally { server.close(); }
+  finally {
+    server.close();
+    process.exit(0);
+  }
 });

@@ -5,23 +5,25 @@ export default function NetworkingSection() {
     <section id="networking" className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
       <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-center">
         <div>
-          <div className="inline-flex bg-cyan-50 border border-cyan-200 text-[#0a1e40] font-black text-xs px-3 py-1 rounded-full">🌐 NETWORKING & WI-FI</div>
+          <div className="inline-flex bg-cyan-50 border border-cyan-200 text-[#0a1e40] font-black text-xs px-3 py-1 rounded-full">
+            <Link to="/services/networking" className="hover:underline">🌐 NETWORKING & WI-FI SILO</Link>
+          </div>
           <h2 className="mt-3 text-2xl md:text-4xl font-black text-[#0a1e40]">Fast, Secure Networking for Shops to Enterprises</h2>
           <p className="mt-3 text-sm text-slate-600">Structured cabling, gigabit LAN, business Wi-Fi, hotspot, firewall & VPN — clean, labelled, future-ready setup.</p>
 
           <div className="mt-5 space-y-3">
             {[
-              { t: "Office Wi-Fi & LAN", d: "Up to 200 users, load balance, seamless roaming" },
-              { t: "Hotel / Cafe Hotspot", d: "OTP login, speed control, billing" },
-              { t: "Fiber & Point-to-Point", d: "Building to building, long range" },
+              { t: "Office Wi-Fi & LAN", d: "Up to 200 users, load balance, seamless roaming", s: "office-wifi-setup" },
+              { t: "Structured LAN Cabling", d: "Cat6 cabling, patch panel & server rack dressing", s: "structured-lan-cabling" },
+              { t: "Firewall & Remote VPN", d: "Intrusion protection, failover & secure WFH tunnels", s: "firewall-vpn-setup" },
             ].map(r => (
-              <div key={r.t} className="flex gap-3 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+              <Link key={r.t} to={`/services/networking/${r.s}`} className="flex gap-3 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:border-[#1e4a9a] transition block group">
                 <div className="w-10 h-10 rounded-xl bg-[#0a1e40] text-yellow-400 grid place-items-center font-black">»</div>
                 <div>
-                  <div className="font-black text-sm text-[#0a1e40]">{r.t}</div>
+                  <div className="font-black text-sm text-[#0a1e40] group-hover:text-[#1e4a9a]">{r.t}</div>
                   <div className="text-xs text-slate-600">{r.d}</div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
@@ -30,14 +32,22 @@ export default function NetworkingSection() {
               <div className="font-black">Free Network Audit & Setup</div>
               <div className="text-xs text-slate-200">We check your current speed & security loopholes</div>
             </div>
-            <Link to="/booking?service=networking" className="px-5 py-2.5 bg-yellow-400 text-[#0a1e40] font-black rounded-full shadow hover:bg-yellow-300 transition">
-              Book Audit & Setup →
+            <Link to="/services/networking" className="px-5 py-2.5 bg-yellow-400 text-[#0a1e40] font-black rounded-full shadow hover:bg-yellow-300 transition">
+              Explore Network Silo →
             </Link>
           </div>
         </div>
 
         <div className="relative">
-          <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80" alt="Networking" className="w-full h-[320px] md:h-[440px] object-cover rounded-[24px] border border-slate-200 shadow-xl" />
+          <img
+            src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80"
+            alt="Commercial Cat6 Structured Cabling and Server Rack in Kolkata by AMD IT SOLUTION"
+            width="800"
+            height="440"
+            loading="lazy"
+            decoding="async"
+            className="w-full h-[320px] md:h-[440px] object-cover rounded-[24px] border border-slate-200 shadow-xl"
+          />
           <div className="absolute bottom-4 left-4 bg-white rounded-2xl p-3 flex items-center gap-3 shadow-xl border border-slate-200">
             <div className="w-10 h-10 rounded-xl bg-emerald-100 grid place-items-center">📶</div>
             <div>

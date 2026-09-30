@@ -10,11 +10,12 @@ export default function Navbar() {
 
   const links = [
     { label: 'All Services', href: '/services', isRoute: true },
-    { label: 'CCTV', href: '/#cctv', isRoute: false },
-    { label: 'Networking', href: '/#networking', isRoute: false },
-    { label: 'AMC', href: '/#amc', isRoute: false },
-    { label: 'Gallery', href: '/#gallery', isRoute: false },
-    { label: 'Contact', href: '/#contact', isRoute: false },
+    { label: 'CCTV', href: '/services/cctv', isRoute: true },
+    { label: 'Computer', href: '/services/computer', isRoute: true },
+    { label: 'Networking', href: '/services/networking', isRoute: true },
+    { label: 'AMC', href: '/services/amc', isRoute: true },
+    { label: 'About', href: '/about', isRoute: true },
+    { label: 'Contact', href: '/contact', isRoute: true },
   ];
 
   const handleLogout = () => { logout(); navigate('/login'); };

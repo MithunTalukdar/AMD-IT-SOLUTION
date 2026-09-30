@@ -29,22 +29,30 @@ export default function CCTVSection() {
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link to="/booking?service=cctv-home-kit" className="px-6 py-3 bg-[#0a1e40] text-white font-black rounded-full hover:bg-[#1e4a9a] transition shadow-md hover:scale-105">
-              Book CCTV Service →
+            <Link to="/services/cctv" className="px-6 py-3 bg-[#0a1e40] text-white font-black rounded-full hover:bg-[#1e4a9a] transition shadow-md hover:scale-105">
+              Explore CCTV Packages →
             </Link>
             <a href="tel:9635006403" className="px-6 py-3 border border-slate-200 font-bold rounded-full hover:bg-slate-50">Talk to CCTV Expert: 9635006403</a>
           </div>
 
           <div className="mt-6 flex gap-4 text-center">
-            <Link to="/booking?service=cctv-home-kit" className="bg-slate-50 border border-slate-200 hover:border-[#1e4a9a] rounded-xl px-4 py-3 flex-1 transition block"><div className="font-black text-[#0a1e40]">₹6,499</div><div className="text-xs">2-Cam Kit</div></Link>
-            <Link to="/booking?service=cctv-shop-combo" className="bg-slate-50 border border-slate-200 hover:border-[#1e4a9a] rounded-xl px-4 py-3 flex-1 transition block"><div className="font-black text-[#0a1e40]">₹12,999</div><div className="text-xs">4-Cam Kit</div></Link>
+            <Link to="/services/cctv/cctv-home-kit" className="bg-slate-50 border border-slate-200 hover:border-[#1e4a9a] rounded-xl px-4 py-3 flex-1 transition block"><div className="font-black text-[#0a1e40]">₹6,499</div><div className="text-xs">2-Cam Kit</div></Link>
+            <Link to="/services/cctv/cctv-shop-combo" className="bg-slate-50 border border-slate-200 hover:border-[#1e4a9a] rounded-xl px-4 py-3 flex-1 transition block"><div className="font-black text-[#0a1e40]">₹12,999</div><div className="text-xs">4-Cam Kit</div></Link>
             <div className="bg-yellow-400 border border-amber-300 rounded-xl px-4 py-3 flex-1"><div className="font-black text-[#0a1e40]">2 Yrs</div><div className="text-xs font-bold">Warranty</div></div>
           </div>
         </div>
 
         <div className="relative">
           <div className="rounded-[24px] overflow-hidden border border-slate-200 shadow-xl">
-            <img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=80" alt="CCTV" className="w-full h-[300px] md:h-[420px] object-cover" />
+            <img
+              src="https://images.unsplash.com/photo-1558002038-1055907df827?w=800&q=80"
+              alt="High Definition CCTV Surveillance Camera Installation in Kolkata by AMD IT SOLUTION"
+              width="800"
+              height="420"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-[300px] md:h-[420px] object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-[24px] pointer-events-none" />
           </div>
           <div className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl p-4 shadow-xl border border-slate-200 flex items-center gap-3">

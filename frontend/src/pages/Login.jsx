@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import SEO from '../components/SEO';
 
 function resolveDestination(loc, user) {
   // 1. Explicit redirect passed via navigation state (string or location object)
@@ -75,6 +76,12 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-10 relative">
+      <SEO
+        title="Client & Admin Login | AMD IT SOLUTION"
+        description="Login to your AMD IT SOLUTION customer, technician or administrator portal."
+        canonicalPath="/login"
+        noindex={true}
+      />
       <form onSubmit={submit} className="w-full max-w-md bg-white rounded-[24px] border border-slate-200 shadow-xl p-6 md:p-8 relative overflow-hidden">
         {loading && (
           <div className="absolute top-0 left-0 right-0 h-1 bg-blue-200 overflow-hidden">

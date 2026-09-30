@@ -17,15 +17,33 @@ export default function Gallery() {
         </div>
 
         <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {imgs.map((src, i) => (
-            <div key={i} className="relative group overflow-hidden rounded-[18px] border border-slate-200 shadow-sm">
-              <img src={src} alt={`work ${i}`} className="w-full h-44 md:h-56 object-cover group-hover:scale-110 transition duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition" />
-              <div className="absolute bottom-3 left-3 bg-white/95 text-xs font-bold px-2.5 py-1 rounded-full hidden group-hover:inline-flex">
-                {["CCTV Shop Setup","Office Networking","Warehouse CCTV","Laptop Lab","Server Rack","AMC Visit"][i]}
+          {imgs.map((src, i) => {
+            const labels = [
+              "Commercial CCTV Camera Setup in Kolkata Retail Store",
+              "Structured Cat6 LAN Cabling in Server Rack Kolkata",
+              "Night Vision Warehouse Surveillance Setup Kolkata",
+              "Laptop Cleanroom Motherboard Diagnostics Lab",
+              "Gigabit Managed Switch and Patch Panel Dressing",
+              "Annual AMC Maintenance Engineer Routine Inspection"
+            ];
+            return (
+              <div key={i} className="relative group overflow-hidden rounded-[18px] border border-slate-200 shadow-sm">
+                <img
+                  src={src}
+                  alt={labels[i]}
+                  width="600"
+                  height="400"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-44 md:h-56 object-cover group-hover:scale-110 transition duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition" />
+                <div className="absolute bottom-3 left-3 bg-white/95 text-xs font-bold px-2.5 py-1 rounded-full hidden group-hover:inline-flex">
+                  {labels[i]}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-6 flex flex-wrap justify-center gap-2 text-xs">

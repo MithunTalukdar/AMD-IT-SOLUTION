@@ -1,0 +1,22 @@
+{
+  "name": "ADM TECHNO SOLUTION — IT & CCTV Services",
+  "short_name": "ADM TECHNO",
+  "description": "Premium IT Services, CCTV Surveillance, Computer/Laptop Repair, Networking & AMC Contracts in Kolkata.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1e40",
+  "theme_color": "#0a1e40",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg"
+    }
+  ]
+}

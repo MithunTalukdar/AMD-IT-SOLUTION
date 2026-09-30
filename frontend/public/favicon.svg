@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1e40"/>
+      <stop offset="50%" stop-color="#0f2f6b"/>
+      <stop offset="100%" stop-color="#1e4a9a"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Shield Shape -->
+  <path d="M256 32L80 96v144c0 144 176 240 176 240s176-96 176-240V96L256 32z" fill="url(#shieldGrad)" stroke="url(#goldGrad)" stroke-width="16"/>
+  <!-- Inner Tech Emblem "A" -->
+  <path d="M256 128L160 336h48l24-52h48l24 52h48L256 128zm0 76l16 36h-32l16-36z" fill="url(#goldGrad)"/>
+  <circle cx="256" cy="100" r="12" fill="#38bdf8"/>
+</svg>

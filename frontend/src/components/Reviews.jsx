@@ -29,7 +29,15 @@ export default function Reviews() {
             <div className="flex text-yellow-400">{"★★★★★".slice(0, r.stars)}</div>
             <p className="mt-3 text-sm text-slate-700 leading-relaxed">“{r.text}”</p>
             <div className="mt-4 flex items-center gap-3">
-              <img src={r.avatar} alt={r.name} className="w-10 h-10 rounded-full object-cover" />
+              <img
+                src={r.avatar}
+                alt={`${r.name} - Verified Client in ${r.role}`}
+                width="40"
+                height="40"
+                loading="lazy"
+                decoding="async"
+                className="w-10 h-10 rounded-full object-cover"
+              />
               <div>
                 <div className="font-black text-sm text-[#0a1e40]">{r.name}</div>
                 <div className="text-xs text-slate-500">{r.role}</div>
