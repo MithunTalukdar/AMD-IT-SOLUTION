@@ -1,5 +1,18 @@
+const getDomain = () => {
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_SITE_URL) {
+    return import.meta.env.VITE_SITE_URL.replace(/\/+$/, '');
+  }
+  if (typeof process !== 'undefined' && process.env) {
+    const envUrl = process.env.VITE_SITE_URL || process.env.SITE_URL;
+    if (envUrl) return envUrl.replace(/\/+$/, '');
+  }
+  return 'https://amd-tecno-solution.vercel.app';
+};
+
+const APP_DOMAIN = getDomain();
+
 export const SITE_CONFIG = {
-  domain: 'https://amditsolution.in',
+  domain: APP_DOMAIN,
   siteName: 'ADM TECHNO SOLUTION',
   legalName: 'ADM TECHNO SOLUTION (AMD IT SOLUTION)',
   tagline: 'Premium IT Services, CCTV Surveillance & AMC in Kolkata',
@@ -18,7 +31,7 @@ export const SITE_CONFIG = {
     longitude: 88.3180,
   },
   openingHours: 'Mo-Su 10:00-21:00',
-  defaultOgImage: 'https://amditsolution.in/og-image.jpg',
+  defaultOgImage: `${APP_DOMAIN}/og-image.jpg`,
   rating: '4.9',
   reviewCount: 1240,
   foundedYear: 2012,

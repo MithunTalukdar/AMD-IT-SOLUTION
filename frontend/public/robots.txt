@@ -1,6 +1,6 @@
 # ==============================================================================
 # ROBOTS.TXT — ADM TECHNO SOLUTION (AMD IT SOLUTION)
-# Target Domain: https://amditsolution.in
+# Target Domain: https://amd-tecno-solution.vercel.app
 # Strict Crawl Budget & Indexing Policy adhering to Google Search Central
 # ==============================================================================
 
@@ -18,6 +18,7 @@ Allow: /favicon.svg
 Allow: /og-image.jpg
 Allow: /site.webmanifest
 Allow: /google*.html
+Allow: /sitemap.xml
 
 # Shield Private, Administrative, User Portals & Transactional Endpoints
 Disallow: /admin
@@ -38,5 +39,5 @@ Disallow: /*?*search=*
 Disallow: /*?*token=*
 
 # Canonical Host & Dynamic Sitemap Directives
-Host: https://amditsolution.in
-Sitemap: https://amditsolution.in/sitemap.xml
+Host: https://amd-tecno-solution.vercel.app
+Sitemap: https://amd-tecno-solution.vercel.app/sitemap.xml

@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function generateXmlSitemap() {
-  const domain = SITE_CONFIG.domain.replace(/\/+$/, '');
+  const domain = (process.env.VITE_SITE_URL || process.env.SITE_URL || SITE_CONFIG.domain).replace(/\/+$/, '');
   const now = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
   const urls = [
@@ -83,10 +83,7 @@ function generateXmlSitemap() {
   }
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n`;
-  xml += `        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n`;
-  xml += `        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9\n`;
-  xml += `        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
   for (const item of urls) {
     xml += `  <url>\n`;

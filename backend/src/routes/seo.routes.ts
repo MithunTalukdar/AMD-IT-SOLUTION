@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import Service from '../models/Service.js';
 
 const router = Router();
-const DOMAIN = (process.env.FRONTEND_URL || 'https://amditsolution.in')
+const DOMAIN = (process.env.FRONTEND_URL || 'https://amd-tecno-solution.vercel.app')
   .split(',')[0]
   .trim()
   .replace(/\/+$/, '');
