@@ -119,6 +119,7 @@ Allow: /assets/
 Allow: /favicon.svg
 Allow: /og-image.jpg
 Allow: /site.webmanifest
+Allow: /google*.html
 
 # Shield Private, Administrative, User Portals & Transactional Endpoints
 Disallow: /admin
@@ -146,6 +147,12 @@ Sitemap: ${DOMAIN}/sitemap.xml
   res.header('Content-Type', 'text/plain; charset=utf-8');
   res.header('Cache-Control', 'public, max-age=86400');
   return res.send(robotsTxt);
+});
+
+// GET /google08d5bc3643a89d67.html (Google Search Console Verification)
+router.get('/google08d5bc3643a89d67.html', (req: Request, res: Response) => {
+  res.header('Content-Type', 'text/html; charset=utf-8');
+  return res.send('google-site-verification: google08d5bc3643a89d67.html');
 });
 
 export default router;

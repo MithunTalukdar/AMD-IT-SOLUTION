@@ -17,6 +17,7 @@ Allow: /assets/
 Allow: /favicon.svg
 Allow: /og-image.jpg
 Allow: /site.webmanifest
+Allow: /google*.html
 
 # Shield Private, Administrative, User Portals & Transactional Endpoints
 Disallow: /admin
