@@ -96,20 +96,32 @@ function generateXmlSitemap() {
 
   xml += `</urlset>\n`;
 
+  let indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  indexXml += `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+  indexXml += `  <sitemap>\n`;
+  indexXml += `    <loc>${domain}/sitemap.xml</loc>\n`;
+  indexXml += `    <lastmod>${now}</lastmod>\n`;
+  indexXml += `  </sitemap>\n`;
+  indexXml += `</sitemapindex>\n`;
+
   const publicDir = path.resolve(__dirname, '../public');
   if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
   }
 
-  const publicTarget = path.join(publicDir, 'sitemap.xml');
-  fs.writeFileSync(publicTarget, xml, 'utf8');
-  console.log(`✓ Sitemap written to: ${publicTarget} (${urls.length} URLs)`);
-
   const distDir = path.resolve(__dirname, '../dist');
+
+  // Write sitemap.xml
+  fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), xml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'sitemap-v1.xml'), xml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'sitemap_index.xml'), indexXml, 'utf8');
+  console.log(`✓ Sitemaps written to public/: sitemap.xml, sitemap-v1.xml, sitemap_index.xml (${urls.length} URLs)`);
+
   if (fs.existsSync(distDir)) {
-    const distTarget = path.join(distDir, 'sitemap.xml');
-    fs.writeFileSync(distTarget, xml, 'utf8');
-    console.log(`✓ Sitemap copied to: ${distTarget}`);
+    fs.writeFileSync(path.join(distDir, 'sitemap.xml'), xml, 'utf8');
+    fs.writeFileSync(path.join(distDir, 'sitemap-v1.xml'), xml, 'utf8');
+    fs.writeFileSync(path.join(distDir, 'sitemap_index.xml'), indexXml, 'utf8');
+    console.log(`✓ Sitemaps copied to dist/: sitemap.xml, sitemap-v1.xml, sitemap_index.xml`);
   }
 
   return urls.length;

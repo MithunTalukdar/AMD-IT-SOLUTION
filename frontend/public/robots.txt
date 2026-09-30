@@ -41,3 +41,4 @@ Disallow: /*?*token=*
 # Canonical Host & Dynamic Sitemap Directives
 Host: https://amd-tecno-solution.vercel.app
 Sitemap: https://amd-tecno-solution.vercel.app/sitemap.xml
+Sitemap: https://amd-tecno-solution.vercel.app/sitemap_index.xml
